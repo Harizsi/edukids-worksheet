@@ -1,4 +1,4 @@
-const { getStore } = require("@netlify/blobs");
+const { getStore, connectLambda } = require("@netlify/blobs");
 
 /*
    Dipanggil dari payment-success.html untuk semak status sebenar order,
@@ -6,6 +6,8 @@ const { getStore } = require("@netlify/blobs");
    oleh payment-callback.js), bukan terus dipercayai dari URL parameter.
 */
 exports.handler = async (event) => {
+    connectLambda(event);
+
     const orderId = event.queryStringParameters && event.queryStringParameters.order_id;
 
     if (!orderId) {

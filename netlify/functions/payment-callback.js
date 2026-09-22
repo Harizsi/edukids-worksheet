@@ -1,5 +1,5 @@
 const crypto = require("crypto");
-const { getStore } = require("@netlify/blobs");
+const { getStore, connectLambda } = require("@netlify/blobs");
 const { PRODUCTS } = require("./_shared/products");
 
 /*
@@ -11,6 +11,8 @@ const { PRODUCTS } = require("./_shared/products");
    (boleh guna Netlify deploy preview / production URL).
 */
 exports.handler = async (event) => {
+    connectLambda(event);
+
     if (event.httpMethod !== "POST") {
         return { statusCode: 405, body: "Method Not Allowed" };
     }

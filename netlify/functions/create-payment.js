@@ -1,7 +1,11 @@
-const { getStore } = require("@netlify/blobs");
+const { getStore, connectLambda } = require("@netlify/blobs");
 const { PRODUCTS, calculatePrice } = require("./_shared/products");
 
 exports.handler = async (event) => {
+    // Wajib untuk classic "exports.handler" functions - tanpa ni Netlify Blobs
+    // akan throw MissingBlobsEnvironmentError.
+    connectLambda(event);
+
     if (event.httpMethod !== "POST") {
         return { statusCode: 405, body: "Method Not Allowed" };
     }
