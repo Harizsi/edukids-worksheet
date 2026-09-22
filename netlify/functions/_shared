@@ -12,22 +12,22 @@ const PRODUCTS = {
     autisme: {
         name: "Set Anak Autisme",
         price: 15,
-        fileUrl: "https://drive.google.com/PLACEHOLDER-autisme"
+        fileUrl: "https://drive.google.com/drive/folders/1ArDB7zvoz-xcVlmR2f2mT_lpbAkzCHAn?usp=sharing"
     },
     membaca: {
         name: "Set Anak Cepat Kenal Huruf & Membaca",
         price: 15,
-        fileUrl: "https://drive.google.com/PLACEHOLDER-membaca"
+        fileUrl: "https://drive.google.com/drive/folders/1zSZ2qJl2xvQjoDFU9Akh3UDt2SLVprbm?usp=sharing"
     },
     motor: {
         name: "Set Latihan Motor Skill & Focus",
         price: 15,
-        fileUrl: "https://drive.google.com/PLACEHOLDER-motor"
+        fileUrl: "https://drive.google.com/drive/folders/18vJ2uQZiBKsw64THxFnAfDFhSRdVSFjK?usp=sharing"
     },
     tahun1: {
         name: "Set Latihan Tahap 1",
         price: 15,
-        fileUrl: "https://drive.google.com/PLACEHOLDER-tahun1"
+        fileUrl: "https://drive.google.com/drive/folders/1JWKRImNhttvO-KHsp7UG_4HZwHj_K_k3?usp=sharing"
     }
 };
 
