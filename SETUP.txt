@@ -1,0 +1,27 @@
+EDUKIDS TOYYIBPAY SETUP
+
+Copy:
+netlify/functions/create-payment.js
+netlify/functions/payment-callback.js
+payment-success.html
+
+Netlify Environment Variables:
+TOYYIBPAY_USER_SECRET_KEY = ToyyibPay secret key
+TOYYIBPAY_CATEGORY_CODE = ToyyibPay category code
+SITE_URL = https://your-domain.com
+
+Optional:
+TOYYIBPAY_BASE_URL = https://toyyibpay.com
+TOYYIBPAY_PAYMENT_CHANNEL = 0
+TOYYIBPAY_ENABLE_DUITNOW_QR = 1
+TOYYIBPAY_CHARGE_DUITNOW_QR = 0
+
+Sandbox:
+TOYYIBPAY_BASE_URL = https://dev.toyyibpay.com
+
+Callback:
+https://your-domain.com/.netlify/functions/payment-callback
+
+The callback verifies ToyyibPay's documented MD5 callback hash. It currently logs verified events; automatic PDF delivery still needs an order store/email delivery layer.
+
+Never put TOYYIBPAY_USER_SECRET_KEY in index.html.
