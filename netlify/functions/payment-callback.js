@@ -1,20 +1,71 @@
-import crypto from "node:crypto";
-const json=(s,b)=>({statusCode:s,headers:{"Content-Type":"application/json; charset=utf-8","Cache-Control":"no-store"},body:JSON.stringify(b)});
-const md5=s=>crypto.createHash("md5").update(s,"utf8").digest("hex");
-exports.handler=async(event)=>{
- if(event.httpMethod!=="POST")return json(405,{error:"Method Not Allowed"});
- const secret=process.env.TOYYIBPAY_USER_SECRET_KEY;if(!secret)return json(500,{error:"Payment configuration incomplete."});
- let body={};
- try{
-  const type=(event.headers["content-type"]||"").toLowerCase();
-  if(type.includes("application/json"))body=JSON.parse(event.body||"{}");
-  else for(const [k,v] of new URLSearchParams(event.body||""))body[k]=v;
- }catch{return json(400,{error:"Invalid callback payload."})}
- const refno=String(body.refno||"").trim(),status=String(body.status||"").trim(),orderId=String(body.order_id||"").trim(),received=String(body.hash||"").trim().toLowerCase();
- if(!refno||!status||!orderId||!received)return json(400,{error:"Incomplete callback payload."});
- const expected=md5(secret+status+orderId+refno+"ok").toLowerCase();
- const valid=received.length===expected.length&&crypto.timingSafeEqual(Buffer.from(received),Buffer.from(expected));
- if(!valid){console.error("Invalid ToyyibPay callback", {orderId,refno});return json(403,{error:"Invalid callback signature."})}
- console.log("VERIFIED_TOYYIBPAY_PAYMENT",JSON.stringify({order_id:orderId,reference_no:refno,status,reason:body.reason||"",bill_code:body.billcode||"",amount:body.amount||"",transaction_time:body.transaction_time||"",received_at:new Date().toISOString()}));
- return json(200,{ok:true,received:true});
+const crypto = require("crypto");
+const { getStore } = require("@netlify/blobs");
+const { PRODUCTS } = require("./_shared/products");
+
+/*
+   Ini URL yang Sir letak sebagai billCallbackUrl semasa create bill.
+   ToyyibPay panggil URL ini dari SERVER dia (bukan browser customer),
+   jadi ini sumber yang BOLEH DIPERCAYAI untuk sahkan pembayaran betul-betul berjaya.
+
+   Callback tidak berfungsi di localhost - kena test di URL Netlify sebenar
+   (boleh guna Netlify deploy preview / production URL).
+*/
+exports.handler = async (event) => {
+    if (event.httpMethod !== "POST") {
+        return { statusCode: 405, body: "Method Not Allowed" };
+    }
+
+    const params = new URLSearchParams(event.body);
+    const status = params.get("status");
+    const orderId = params.get("order_id");
+    const refno = params.get("refno");
+    const receivedHash = params.get("hash");
+
+    if (!orderId || !receivedHash) {
+        return { statusCode: 400, body: "Missing parameters" };
+    }
+
+    // Wajib sahkan hash - jangan proses kalau tak sepadan
+    const expectedHash = crypto
+        .createHash("md5")
+        .update(`${process.env.TOYYIBPAY_SECRET_KEY}${status}${orderId}${refno}ok`)
+        .digest("hex");
+
+    if (receivedHash !== expectedHash) {
+        console.error("Hash tidak sepadan untuk order:", orderId);
+        return { statusCode: 403, body: "Invalid hash" };
+    }
+
+    const store = getStore("orders");
+    const order = await store.get(orderId, { type: "json" });
+
+    if (!order) {
+        console.error("Order tidak dijumpai:", orderId);
+        return { statusCode: 404, body: "Order not found" };
+    }
+
+    if (status === "1") {
+        // Pembayaran berjaya - sediakan link download
+        const downloadLinks = order.products.map((id) => ({
+            name: PRODUCTS[id].name,
+            url: PRODUCTS[id].fileUrl
+        }));
+
+        await store.setJSON(orderId, {
+            ...order,
+            status: "paid",
+            refno,
+            paidAt: new Date().toISOString(),
+            downloadLinks
+        });
+    } else {
+        // status 2 = pending, 3 = fail
+        await store.setJSON(orderId, {
+            ...order,
+            status: status === "3" ? "failed" : "pending",
+            refno
+        });
+    }
+
+    return { statusCode: 200, body: "OK" };
 };

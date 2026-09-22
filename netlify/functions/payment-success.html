@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pembayaran Berjaya | EduKids Worksheet</title>
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f7f4ef;
+        color: #222;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+    .card {
+        background: white;
+        border-radius: 20px;
+        padding: 40px 32px;
+        max-width: 480px;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+    }
+    .icon { font-size: 48px; margin-bottom: 16px; }
+    h1 { font-size: 24px; margin-bottom: 10px; }
+    p.sub { color: #666; margin-bottom: 24px; }
+    .links { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .links a {
+        display: block;
+        background: #ff7a45;
+        color: white;
+        text-decoration: none;
+        padding: 14px;
+        border-radius: 12px;
+        font-weight: 700;
+    }
+    .links a:hover { background: #e96330; }
+    .status-msg { color: #666; font-size: 15px; }
+    .spinner {
+        width: 28px; height: 28px;
+        border: 3px solid #eee;
+        border-top-color: #ff7a45;
+        border-radius: 50%;
+        margin: 0 auto 16px;
+        animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .back-link { display: inline-block; margin-top: 16px; color: #ff7a45; font-size: 14px; }
+</style>
+</head>
+<body>
+
+<div class="card" id="card">
+    <div class="spinner"></div>
+    <h1>Menyemak status pembayaran...</h1>
+    <p class="sub status-msg" id="statusMsg">Sila tunggu sebentar, jangan tutup halaman ini.</p>
+</div>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const orderId = params.get("order_id");
+    const statusId = params.get("status_id"); // 1=success, 2=pending, 3=fail (dari ToyyibPay, hiasan sahaja)
+
+    const card = document.getElementById("card");
+    const statusMsg = document.getElementById("statusMsg");
+
+    let attempts = 0;
+    const MAX_ATTEMPTS = 15; // ~30 saat polling, callback ToyyibPay biasanya laju
+
+    function renderPaid(downloadLinks) {
+        let linksHtml = downloadLinks.map(
+            (item) => `<a href="${item.url}" target="_blank" rel="noopener">Muat Turun: ${item.name}</a>`
+        ).join("");
+
+        card.innerHTML = `
+            <div class="icon">✅</div>
+            <h1>Pembayaran Berjaya!</h1>
+            <p class="sub">Terima kasih. Klik untuk muat turun worksheet anda:</p>
+            <div class="links">${linksHtml}</div>
+            <p class="status-msg">Link ini juga selamat, tapi simpan/screenshot kalau perlu.</p>
+        `;
+    }
+
+    function renderFailed() {
+        card.innerHTML = `
+            <div class="icon">⚠️</div>
+            <h1>Pembayaran Tidak Berjaya</h1>
+            <p class="sub">Transaksi gagal atau dibatalkan. Sila cuba semula.</p>
+            <a class="back-link" href="/#products">Kembali ke halaman produk</a>
+        `;
+    }
+
+    function renderStillPending() {
+        card.innerHTML = `
+            <div class="icon">⏳</div>
+            <h1>Pembayaran Sedang Diproses</h1>
+            <p class="sub">Kadang-kadang pengesahan mengambil masa sedikit lebih lama.
+            Sila refresh halaman ini dalam 1-2 minit, atau hubungi kami dengan
+            Order ID: <strong>${orderId || "-"}</strong></p>
+        `;
+    }
+
+    async function pollStatus() {
+        if (!orderId) {
+            renderFailed();
+            return;
+        }
+
+        try {
+            const res = await fetch(`/.netlify/functions/check-order?order_id=${encodeURIComponent(orderId)}`);
+            const data = await res.json();
+
+            if (data.status === "paid") {
+                renderPaid(data.downloadLinks);
+                return;
+            }
+
+            if (data.status === "failed" || statusId === "3") {
+                renderFailed();
+                return;
+            }
+
+            attempts++;
+            if (attempts >= MAX_ATTEMPTS) {
+                renderStillPending();
+                return;
+            }
+
+            statusMsg.textContent = `Menyemak status pembayaran... (${attempts}/${MAX_ATTEMPTS})`;
+            setTimeout(pollStatus, 2000);
+
+        } catch (err) {
+            console.error("Check order error:", err);
+            attempts++;
+            if (attempts >= MAX_ATTEMPTS) {
+                renderStillPending();
+                return;
+            }
+            setTimeout(pollStatus, 2000);
+        }
+    }
+
+    pollStatus();
+</script>
+
+</body>
+</html>
