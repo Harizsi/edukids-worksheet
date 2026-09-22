@@ -1,1 +1,44 @@
 
+/*
+   Katalog produk + harga bundle.
+   INI MESTI SAMA dengan `products` dan `calculatePrice()` dalam index.html,
+   supaya harga yang dikira server sentiasa padan dengan apa yang customer nampak.
+
+   PENTING: gantikan fileUrl di bawah dengan link muat turun SEBENAR
+   (Google Drive "Anyone with the link", Dropbox, dsb) sebelum deploy live.
+*/
+
+const PRODUCTS = {
+    autisme: {
+        name: "Set Anak Autisme",
+        price: 15,
+        fileUrl: "https://drive.google.com/PLACEHOLDER-autisme"
+    },
+    membaca: {
+        name: "Set Anak Cepat Kenal Huruf & Membaca",
+        price: 15,
+        fileUrl: "https://drive.google.com/PLACEHOLDER-membaca"
+    },
+    motor: {
+        name: "Set Latihan Motor Skill & Focus",
+        price: 15,
+        fileUrl: "https://drive.google.com/PLACEHOLDER-motor"
+    },
+    tahun1: {
+        name: "Set Latihan Tahap 1",
+        price: 15,
+        fileUrl: "https://drive.google.com/PLACEHOLDER-tahun1"
+    }
+};
+
+// Sama macam calculatePrice() dalam index.html
+function calculatePrice(count) {
+    if (count === 0) return 0;
+    if (count === 1) return 15;
+    if (count === 2) return 25;
+    if (count === 3) return 35;
+    if (count === 4) return 45;
+    return 45;
+}
+
+module.exports = { PRODUCTS, calculatePrice };
