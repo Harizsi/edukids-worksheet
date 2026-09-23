@@ -1,0 +1,3045 @@
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EduKids Worksheet | Aktiviti Pembelajaran Kanak-Kanak</title>
+
+    <meta
+        name="description"
+        content="Koleksi worksheet digital untuk membantu kanak-kanak belajar, fokus, mengenal huruf, membaca dan mengembangkan kemahiran motor."
+    >
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #222;
+            background: #f7f4ef;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+        button {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* =========================
+           GENERAL
+        ========================= */
+
+        .container {
+            width: min(1120px, 92%);
+            margin: auto;
+        }
+
+        .section {
+            padding: 70px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: clamp(28px, 5vw, 42px);
+            line-height: 1.2;
+            margin-bottom: 12px;
+            color: #222;
+        }
+
+        .section-title p {
+            max-width: 650px;
+            margin: auto;
+            color: #666;
+            font-size: 17px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #fff0c7;
+            color: #8a5b00;
+            padding: 7px 14px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .btn {
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            transition: 0.2s ease;
+            min-height: 48px;
+        }
+
+        .btn-primary {
+            background: #ff7a45;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #e96330;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .btn-secondary:hover {
+            background: #f7f7f7;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            padding: 70px 0;
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffe4d6 0%,
+                    #ffd6e8 40%,
+                    #d6e4ff 100%
+                );
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(38px, 6vw, 62px);
+            line-height: 1.08;
+            margin-bottom: 20px;
+            color: #222;
+        }
+
+        .hero-content h1 span {
+            color: #ff7043;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: #555;
+            max-width: 600px;
+            margin-bottom: 28px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hero-image {
+            background: white;
+            border-radius: 24px;
+            padding: 12px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            transform: rotate(2deg);
+        }
+
+        .hero-image img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+
+        /* =========================
+           PROBLEM
+        ========================= */
+
+        .problem {
+            background: #d4f0e6;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .problem-card {
+            padding: 28px;
+            border-radius: 18px;
+            background: #ffffff;
+            border: 1px solid #a8d9c8;
+        }
+
+        .problem-icon {
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+
+        .problem-card h3 {
+            margin-bottom: 8px;
+            font-size: 20px;
+        }
+
+        .problem-card p {
+            color: #666;
+        }
+
+        /* =========================
+           VIDEO
+        ========================= */
+
+        .video-section {
+            background: #ddd6f3;
+        }
+
+        .video-wrapper {
+            max-width: 850px;
+            margin: auto;
+            background: #111;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            display: block;
+            max-height: 600px;
+        }
+
+        /* =========================
+           PRODUCTS
+        ========================= */
+
+        .products {
+            background: #ffecd9;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+
+        .product-card {
+            background: white;
+            border: 2px solid #eee;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: 0.2s ease;
+        }
+
+        .product-card.selected {
+            border-color: #ff7a45;
+            box-shadow: 0 10px 30px rgba(255, 122, 69, 0.15);
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .product-content {
+            padding: 24px;
+        }
+
+        .product-title {
+            font-size: 23px;
+            line-height: 1.3;
+            margin-bottom: 8px;
+        }
+
+        .product-description {
+            color: #666;
+            margin-bottom: 18px;
+        }
+
+        /* =========================
+           IMAGE PREVIEW
+        ========================= */
+
+        .main-preview {
+            background: #f2f2f2;
+            padding: 12px;
+        }
+
+        .main-preview img {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            max-height: 620px;
+            object-fit: contain;
+            background: white;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .thumbnail-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .thumbnail {
+            border: 2px solid transparent;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            background: #eee;
+        }
+
+        .thumbnail.active {
+            border-color: #ff7a45;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            object-fit: cover;
+        }
+
+        .product-features {
+            list-style: none;
+            margin: 18px 0;
+        }
+
+        .product-features li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .product-features li::before {
+            content: "✓";
+            color: #27a745;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .product-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .product-price {
+            font-size: 22px;
+            font-weight: 800;
+            color: #ff7043;
+        }
+
+        .select-btn {
+            border: 1px solid #ddd;
+            background: white;
+            color: #333;
+            padding: 11px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            min-height: 44px;
+        }
+
+        .product-card.selected .select-btn {
+            background: #ff7043;
+            color: white;
+            border-color: #ff7043;
+        }
+
+        /* =========================
+           WHAT INSIDE
+        ========================= */
+
+        .inside {
+            background: #d8efe6;
+        }
+
+        .inside-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .inside-card {
+            padding: 25px 18px;
+            text-align: center;
+            border-radius: 18px;
+            background: #ffffff;
+            border: 1px solid #a8d4c4;
+        }
+
+        .inside-card .icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .inside-card h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .inside-card p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* =========================
+           WHO
+        ========================= */
+
+        .who {
+            background: #ffe0c2;
+        }
+
+        .who-list {
+            max-width: 750px;
+            margin: auto;
+        }
+
+        .who-item {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            padding: 16px 0;
+            border-bottom: 1px solid #ead9c4;
+        }
+
+        .who-check {
+            min-width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #ff7a45;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* =========================
+           PRICING
+        ========================= */
+
+        .pricing {
+            background: #cce5f7;
+        }
+
+        .pricing-box {
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .price-table th,
+        .price-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+
+        .price-table th {
+            background: #f8f8f8;
+        }
+
+        .price-table td:last-child,
+        .price-table th:last-child {
+            text-align: right;
+            font-weight: 700;
+        }
+
+        .price-note {
+            background: #fff7e1;
+            border-radius: 12px;
+            padding: 15px;
+            color: #765900;
+            font-size: 14px;
+        }
+
+        /* =========================
+           HOW TO BUY
+        ========================= */
+
+        #how-to-buy {
+            background: #f9d6e5;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .step {
+            text-align: center;
+            padding: 25px;
+        }
+
+        .step-number {
+            width: 55px;
+            height: 55px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ff7043;
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .step h3 {
+            margin-bottom: 7px;
+        }
+
+        .step p {
+            color: #666;
+        }
+
+        /* =========================
+           FAQ
+        ========================= */
+
+        .faq {
+            background: #fff0c2;
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .faq-question {
+            width: 100%;
+            border: none;
+            background: transparent;
+            padding: 20px 0;
+            text-align: left;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 0 0 20px;
+            color: #666;
+        }
+
+        .faq-item.open .faq-answer {
+            display: block;
+        }
+
+        .faq-icon {
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        /* =========================
+           CTA
+        ========================= */
+
+        .final-cta {
+            background: linear-gradient(135deg, #ff9a7a 0%, #ff7a45 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: clamp(30px, 5vw, 44px);
+            margin-bottom: 12px;
+        }
+
+        .final-cta p {
+            max-width: 650px;
+            margin: 0 auto 25px;
+            opacity: 0.92;
+        }
+
+        .final-cta .btn {
+            background: white;
+            color: #ff7043;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #222;
+            color: #aaa;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 14px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* =========================
+           STICKY CART
+        ========================= */
+
+        .cart-bar {
+            position: fixed;
+            left: 50%;
+            bottom: 20px;
+            transform: translateX(-50%);
+            width: min(600px, 92%);
+            background: #222;
+            color: white;
+            padding: 14px 18px;
+            border-radius: 15px;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+            z-index: 1000;
+        }
+
+        .cart-bar.show {
+            display: flex;
+        }
+
+        .cart-info {
+            font-size: 14px;
+            min-width: 0;
+        }
+
+        .cart-total {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .cart-btn {
+            border: none;
+            background: #ff7043;
+            color: white;
+            padding: 11px 18px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: bold;
+            min-height: 44px;
+            white-space: nowrap;
+        }
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 2000;
+            padding: 20px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-box {
+            background: white;
+            width: min(600px, 100%);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            border: none;
+            background: none;
+            font-size: 28px;
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+        }
+
+        .modal-box h2 {
+            margin-bottom: 8px;
+            padding-right: 35px;
+        }
+
+        .modal-box > p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .checkout-summary {
+            background: #f7f7f7;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .checkout-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 7px 0;
+        }
+
+        .checkout-row span {
+            overflow-wrap: anywhere;
+        }
+
+        .checkout-total {
+            border-top: 1px solid #ddd;
+            margin-top: 8px;
+            padding-top: 12px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 9px;
+            font-size: 16px;
+            min-height: 48px;
+        }
+
+        .checkout-submit {
+            width: 100%;
+            border: none;
+            background: #ff7043;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            min-height: 50px;
+        }
+
+        .checkout-notice {
+            margin-top: 15px;
+            padding: 12px;
+            background: #fff7e1;
+            color: #765900;
+            border-radius: 9px;
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           PAYMENT CHECKOUT
+        ========================= */
+
+        .payment-method-box {
+            margin: 18px 0;
+            padding: 15px;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            background: #fafafa;
+        }
+
+        .payment-method-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .payment-method {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: white;
+            font-size: 14px;
+        }
+
+        .payment-method strong {
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .checkout-check {
+            display: flex;
+            gap: 9px;
+            align-items: flex-start;
+            margin: 15px 0;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .checkout-check input {
+            width: 18px;
+            height: 18px;
+            min-width: 18px;
+            margin-top: 2px;
+        }
+
+        .checkout-status {
+            display: none;
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 9px;
+            font-size: 14px;
+        }
+
+        .checkout-status.show {
+            display: block;
+        }
+
+        .checkout-status.error {
+            background: #fff0f0;
+            color: #a12626;
+            border: 1px solid #f0caca;
+        }
+
+        .checkout-status.loading {
+            background: #f2f6ff;
+            color: #31558f;
+            border: 1px solid #d7e2fa;
+        }
+
+        .checkout-submit:disabled {
+            opacity: 0.65;
+            cursor: wait;
+        }
+
+        @media (max-width: 600px) {
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* =========================
+           LIGHTBOX
+        ========================= */
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .lightbox.show {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 95%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: fixed;
+            top: 20px;
+            right: 25px;
+            border: none;
+            background: none;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+        }
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content {
+                text-align: center;
+            }
+
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .problem-grid,
+            .inside-grid,
+            .steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-image {
+                max-width: 700px;
+                width: 100%;
+                margin: 0 auto;
+            }
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            body {
+                font-size: 15px;
+            }
+
+            .container {
+                width: calc(100% - 28px);
+            }
+
+            .section {
+                padding: 50px 0;
+            }
+
+            .section-title {
+                margin-bottom: 30px;
+            }
+
+            .section-title h2 {
+                font-size: 29px;
+            }
+
+            .section-title p {
+                font-size: 15px;
+            }
+
+            /* HERO */
+
+            .hero {
+                padding: 42px 0 50px;
+            }
+
+            .hero-grid {
+                gap: 30px;
+            }
+
+            .hero-content h1 {
+                font-size: 40px;
+                line-height: 1.08;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+                margin-bottom: 22px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 420px;
+                margin: auto;
+            }
+
+            .hero-buttons .btn {
+                width: 100%;
+            }
+
+            .hero-image {
+                width: 100%;
+                max-width: 500px;
+                margin: 0 auto;
+                padding: 8px;
+                border-radius: 18px;
+                transform: none;
+            }
+
+            .hero-image img {
+                aspect-ratio: 4 / 3;
+                border-radius: 12px;
+            }
+
+            /* GENERAL GRIDS */
+
+            .problem-grid,
+            .inside-grid,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            /* VIDEO */
+
+            .video-wrapper {
+                border-radius: 14px;
+            }
+
+            .video-wrapper video {
+                max-height: 500px;
+            }
+
+            /* PRODUCT */
+
+            .product-grid {
+                gap: 20px;
+            }
+
+            .product-card {
+                border-radius: 16px;
+            }
+
+            .product-content {
+                padding: 18px;
+            }
+
+            .product-title {
+                font-size: 20px;
+            }
+
+            .product-description {
+                font-size: 15px;
+            }
+
+            .main-preview {
+                padding: 8px;
+            }
+
+            .main-preview img {
+                aspect-ratio: 3 / 4;
+                max-height: 520px;
+                border-radius: 10px;
+            }
+
+            .thumbnail-row {
+                gap: 6px;
+                margin-top: 8px;
+            }
+
+            .thumbnail {
+                border-radius: 7px;
+            }
+
+            .product-bottom {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+
+            .product-price {
+                font-size: 21px;
+            }
+
+            .select-btn {
+                width: 100%;
+                min-height: 48px;
+            }
+
+            /* WHO */
+
+            .who-item {
+                gap: 12px;
+            }
+
+            /* PRICING */
+
+            .pricing-box {
+                padding: 20px 15px;
+                border-radius: 18px;
+            }
+
+            .price-table {
+                margin: 15px 0;
+            }
+
+            .price-table th,
+            .price-table td {
+                padding: 11px 8px;
+                font-size: 14px;
+            }
+
+            .price-note {
+                font-size: 13px;
+            }
+
+            /* STEPS */
+
+            .step {
+                padding: 18px;
+            }
+
+            /* FAQ */
+
+            .faq-question {
+                font-size: 16px;
+                padding: 18px 0;
+            }
+
+            /* CTA */
+
+            .final-cta h2 {
+                font-size: 31px;
+            }
+
+            /* STICKY CART */
+
+            .cart-bar {
+                width: calc(100% - 20px);
+                bottom: 10px;
+                padding: 10px;
+                gap: 10px;
+                border-radius: 13px;
+            }
+
+            .cart-info {
+                min-width: 0;
+            }
+
+            .cart-count {
+                white-space: nowrap;
+            }
+
+            .cart-total {
+                font-size: 18px;
+            }
+
+            .cart-btn {
+                padding: 10px 14px;
+                min-height: 44px;
+            }
+
+            /* MODAL */
+
+            .modal {
+                padding: 10px;
+                align-items: flex-end;
+            }
+
+            .modal.show {
+                align-items: center;
+            }
+
+            .modal-box {
+                padding: 22px 18px;
+                border-radius: 16px;
+                max-height: calc(100vh - 20px);
+            }
+
+            .modal-close {
+                top: 8px;
+                right: 8px;
+            }
+
+            .checkout-row {
+                font-size: 14px;
+            }
+
+            .checkout-total {
+                font-size: 18px;
+            }
+
+            /* LIGHTBOX */
+
+            .lightbox {
+                padding: 10px;
+            }
+
+            .lightbox img {
+                max-width: 96%;
+                max-height: 85vh;
+            }
+
+            .lightbox-close {
+                top: 8px;
+                right: 8px;
+                font-size: 36px;
+            }
+
+            /* FOOTER */
+
+            footer {
+                padding: 25px 15px;
+                font-size: 13px;
+            }
+        }
+
+        /* =========================
+           VERY SMALL PHONE
+        ========================= */
+
+        @media (max-width: 380px) {
+
+            .hero-content h1 {
+                font-size: 35px;
+            }
+
+            .section-title h2 {
+                font-size: 26px;
+            }
+
+            .badge {
+                font-size: 13px;
+            }
+
+            .cart-bar {
+                padding: 9px;
+            }
+
+            .cart-total {
+                font-size: 17px;
+            }
+
+            .cart-btn {
+                padding: 9px 11px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+    <div class="container hero-grid">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                Worksheet Digital Untuk Kanak-Kanak
+            </div>
+
+            <h1>
+                Belajar Jadi Lebih
+                <span>Seronok</span>
+                & Terarah
+            </h1>
+
+            <p>
+                Koleksi worksheet yang direka untuk membantu kanak-kanak
+                berlatih membaca, mengenal huruf, meningkatkan fokus,
+                kemahiran motor dan asas pembelajaran Tahun 1–3.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#products" class="btn btn-primary">
+                    Lihat Worksheet
+                </a>
+
+                <a href="#how-to-buy" class="btn btn-secondary">
+                    Cara Membeli
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="hero-image">
+
+            <img
+                src="images/hero.jpeg"
+                alt="EduKids Worksheet"
+                loading="eager"
+            >
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =====================================================
+     PROBLEM
+===================================================== -->
+
+<section class="section problem">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <div class="badge">
+                Untuk Ibu Bapa
+            </div>
+
+            <h2>
+                Anak Perlukan Aktiviti Yang Sesuai?
+            </h2>
+
+            <p>
+                Worksheet boleh menjadi salah satu cara mudah
+                untuk menyediakan aktiviti pembelajaran di rumah.
+            </p>
+
+        </div>
+
+        <div class="problem-grid">
+
+            <div class="problem-card">
+
+                <div class="problem-icon">📚</div>
+
+                <h3>
+                    Susah Cari Aktiviti
+                </h3>
+
+                <p>
+                    Banyak pilihan di internet tetapi tidak semua
+                    sesuai dengan tahap pembelajaran anak.
+                </p>
+
+            </div>
+
+            <div class="problem-card">
+
+                <div class="problem-icon">🎯</div>
+
+                <h3>
+                    Nak Anak Lebih Fokus
+                </h3>
+
+                <p>
+                    Aktiviti berstruktur boleh membantu anak
+                    fokus pada satu tugasan pada satu masa.
+                </p>
+
+            </div>
+
+            <div class="problem-card">
+
+                <div class="problem-icon">✏️</div>
+
+                <h3>
+                    Nak Aktiviti Di Rumah
+                </h3>
+
+                <p>
+                    Boleh dicetak dan digunakan untuk aktiviti
+                    pembelajaran di rumah.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     VIDEO
+===================================================== -->
+
+<section class="section video-section">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <div class="badge">
+                Lihat Contoh
+            </div>
+
+            <h2>
+                Apa Yang Ada Dalam Worksheet?
+            </h2>
+
+            <p>
+                Tunjukkan contoh worksheet anda melalui video
+                pendek supaya ibu bapa boleh melihat kandungan
+                sebelum membeli.
+            </p>
+
+        </div>
+
+        <div class="video-wrapper">
+
+            <video
+                controls
+                playsinline
+                preload="metadata"
+                poster="images/video-cover.jpg"
+            >
+
+                <source
+                    src="video/demo.mp4"
+                    type="video/mp4"
+                >
+
+                Browser anda tidak menyokong video HTML5.
+
+            </video>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PRODUCTS
+===================================================== -->
+
+<section class="section products" id="products">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <div class="badge">
+                Koleksi Worksheet
+            </div>
+
+            <h2>
+                Pilih Set Yang Sesuai
+            </h2>
+
+            <p>
+                Anda boleh pilih satu atau beberapa set.
+                Semakin banyak set dipilih, semakin berbaloi.
+            </p>
+
+        </div>
+
+
+        <div class="product-grid">
+
+
+            <!-- PRODUCT 1 -->
+
+            <div
+                class="product-card"
+                data-product="autisme"
+                data-price="1"
+            >
+
+                <div class="main-preview">
+
+                    <img
+                        class="main-image"
+                        src="images/autisme-1.png"
+                        alt="Set Anak Autisme"
+                        loading="eager"
+                        onclick="openLightbox(this.src)"
+                    >
+
+                    <div class="thumbnail-row">
+
+                        <div
+                            class="thumbnail active"
+                            onclick="changePreview(this, 'images/autisme-1.png')"
+                        >
+                            <img
+                                src="images/autisme-1.png"
+                                alt=""
+                                loading="lazy"
+                            >
+                        </div>
+
+                        <div
+                            class="thumbnail"
+                            onclick="changePreview(this, 'images/autisme-2.png')"
+                        >
+                            <img
+                                src="images/autisme-2.png"
+                                alt=""
+                                loading="lazy"
+                            >
+                        </div>
+
+                        <div
+                            class="thumbnail"
+                            onclick="changePreview(this, 'images/autisme-3.png')"
+                        >
+                            <img
+                                src="images/autisme-3.png"
+                                alt=""
+                                loading="lazy"
+                            >
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="product-content">
+
+                    <h3 class="product-title">
+                        Set Anak Autisme
+                    </h3>
+
+                    <p class="product-description">
+                        Aktiviti mudah dan tersusun untuk pembelajaran serta
+                        latihan fokus di rumah atau bersama guru.
+                    </p>
+
+                    <ul class="product-features">
+                        <li>Coloring & Dot to Dot</li>
+                        <li>Scissors Cutting & Tracing</li>
+                        <li>Melatih fokus dan koordinasi tangan & mata</li>
+                    </ul>
+
+                    <div class="product-bottom">
+
+                        <div class="product-price">
+                            RM1
+                        </div>
+
+                        <button
+                            class="select-btn"
+                            onclick="toggleProduct('autisme')"
+                        >
+                            Pilih Set
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 2 -->
+
+            <div
+                class="product-card"
+                data-product="membaca"
+                data-price="1"
+            >
+
+                <div class="main-preview">
+
+                    <img
+                        class="main-image"
+                        src="images/membaca-1.png"
+                        alt="Set Anak Cepat Kenal Huruf dan Membaca"
+                        loading="lazy"
+                        onclick="openLightbox(this.src)"
+                    >
+
+                    <div class="thumbnail-row">
+
+                        <div
+                            class="thumbnail active"
+                            onclick="changePreview(this, 'images/membaca-1.png')"
+                        >
+                            <img
+                                src="images/membaca-1.png"
+                                alt=""
+                                loading="lazy"
+                            >
+                        </div>
+
+                        <div
+                            class="thumbnail"
+                            onclick="changePreview(this, 'images/membaca-2.png')"
+                        >
+                            <img
+                                src="images/membaca-2.png"
+                                alt=""
+                                loading="lazy"
+                            >
+                        </div>
+
+                        <div
+                            class="thumbnail"
+                            onclick="changePreview(this, 'images/membaca-3.png')"
+                            >
+                            <img
+                                src="images/membaca-3.png"
+                                alt=""
+                                loading="lazy"
+                            >
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="product-content">
+
+                    <h3 class="product-title">
+                        Set Anak Cepat Kenal Huruf & Membaca
+                    </h3>
+
+                    <p class="product-description">
+                        Bina asas membaca melalui aktiviti huruf, bunyi, nombor,
+                        bentuk dan pengecaman yang mudah.
+                    </p>
+
+                    <ul class="product-features">
+                        <li>Flash Card, Phonics & Jawi</li>
+                        <li>Matching Alphabets, Numbers & Shapes</li>
+                        <li>Coloring & Tracing</li>
+                    </ul>
+
+                    <div class="product-bottom">
+
+                        <div class="product-price">
+                            RM1
+                        </div>
+
+                        <button
+                            class="select-btn"
+                            onclick="toggleProduct('membaca')"
+                        >
+                            Pilih Set
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 3 -->
+
+            <div
+                class="product-card"
+                data-product="motor"
+                data-price="1"
+            >
+
+                <div class="main-preview">
+
+                    <img
+                        class="main-image"
+                        src="images/motor-1.jpg"
+                        alt="Set Latihan Motor Skill dan Focus"
+                        loading="lazy"
+                        onclick="openLightbox(this.src)"
+                    >
+
+                    <div class="thumbnail-row">
+
+                        <div
+                            class="thumbnail active"
+                            onclick="changePreview(this, 'images/motor-1.jpg')"
+                        >
+                            <img
+                                src="images/motor-1.jpg"
+                                alt=""
+                                loading="lazy"
+                            >
+                        </div>
+
+                        <div
+                            class="thumbnail"
+                            onclick="changePreview(this, 'images/motor-2.png')"
+                        >
+                            <img
+                                src="images/motor-2.png"
+                                alt=""
+                                loading="lazy"
+                            >
+                        </div>
+
+                        <div
+                            class="thumbnail"
+                            onclick="changePreview(this, 'images/motor-3.png')"
+                        >
+                            <img
+                                src="images/motor-3.png"
+                                alt=""
+                                loading="lazy"
+                            >
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="product-content">
+
+                    <h3 class="product-title">
+                        Set Latihan Motor Skill & Focus
+                    </h3>
+
+                    <p class="product-description">
+                        Aktiviti hands-on untuk melatih motor halus,
+                        koordinasi, ketepatan dan fokus anak.
+                    </p>
+
+                    <ul class="product-features">
+                        <li>Maze, Matching & Trace Lines</li>
+                        <li>Cari Perbezaan & Gunting & Tampal</li>
+                        <li>Pelbagai aktiviti Busy Book</li>
+                    </ul>
+
+                    <div class="product-bottom">
+
+                        <div class="product-price">
+                            RM1
+                        </div>
+
+                        <button
+                            class="select-btn"
+                            onclick="toggleProduct('motor')"
+                        >
+                            Pilih Set
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 4 -->
+
+            <div
+                class="product-card"
+                data-product="tahun1"
+                data-price="1"
+            >
+
+                <div class="main-preview">
+
+                    <img
+                        class="main-image"
+                        src="images/tahun1-1.png"
+                        alt="Set Latihan Tahap 1 Tahun 1 hingga Tahun 3"
+                        loading="lazy"
+                        onclick="openLightbox(this.src)"
+                    >
+
+                    <div class="thumbnail-row">
+
+                        <div
+                            class="thumbnail active"
+                            onclick="changePreview(this, 'images/tahun1-1.png')"
+                        >
+                            <img
+                                src="images/tahun1-1.png"
+                                alt=""
+                                loading="lazy"
+                            >
+                        </div>
+
+                        <div
+                            class="thumbnail"
+                            onclick="changePreview(this, 'images/tahun1-2.png')"
+                        >
+                            <img
+                                src="images/tahun1-2.png"
+                                alt=""
+                                loading="lazy"
+                            >
+                        </div>
+
+                        <div
+                            class="thumbnail"
+                            onclick="changePreview(this, 'images/tahun1-3.png')"
+                        >
+                            <img
+                                src="images/tahun1-3.png"
+                                alt=""
+                                loading="lazy"
+                            >
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="product-content">
+
+                    <h3 class="product-title">
+                        Set Latihan Tahap 1
+                    </h3>
+
+                    <p class="product-description">
+                        Koleksi latihan Tahun 1 hingga Tahun 3 merangkumi
+                        4 subjek utama serta latihan bonus.
+                    </p>
+
+                    <ul class="product-features">
+                        <li>Bahasa Melayu & English</li>
+                        <li>Matematik & Sains</li>
+                        <li>Latihan Bonus</li>
+                    </ul>
+
+                    <div class="product-bottom">
+
+                        <div class="product-price">
+                            RM1
+                        </div>
+
+                        <button
+                            class="select-btn"
+                            onclick="toggleProduct('tahun1')"
+                        >
+                            Pilih Set
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     WHAT'S INSIDE
+===================================================== -->
+
+<section class="section inside">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <div class="badge">
+                Apa Yang Anda Dapat
+            </div>
+
+            <h2>
+                Direka Untuk Aktiviti Pembelajaran
+            </h2>
+
+        </div>
+
+        <div class="inside-grid">
+
+            <div class="inside-card">
+                <div class="icon">🖨️</div>
+                <h3>Printable</h3>
+                <p>Boleh dicetak untuk aktiviti anak.</p>
+            </div>
+
+            <div class="inside-card">
+                <div class="icon">✏️</div>
+                <h3>Aktiviti Menulis</h3>
+                <p>Latihan menulis dan mengikut arahan.</p>
+            </div>
+
+            <div class="inside-card">
+                <div class="icon">🧩</div>
+                <h3>Aktiviti Interaktif</h3>
+                <p>Pelbagai aktiviti untuk mengelakkan pembelajaran monoton.</p>
+            </div>
+
+            <div class="inside-card">
+                <div class="icon">🎯</div>
+                <h3>Latihan Fokus</h3>
+                <p>Aktiviti yang memerlukan perhatian dan ketelitian.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     WHO IS IT FOR
+===================================================== -->
+
+<section class="section who">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <div class="badge">
+                Sesuai Untuk
+            </div>
+
+            <h2>
+                Siapa Yang Boleh Gunakan?
+            </h2>
+
+        </div>
+
+        <div class="who-list">
+
+            <div class="who-item">
+                <div class="who-check">✓</div>
+                <div>
+                    <strong>Ibu bapa</strong>
+                    <p>
+                        Yang mahu menyediakan aktiviti tambahan
+                        untuk anak di rumah.
+                    </p>
+                </div>
+            </div>
+
+            <div class="who-item">
+                <div class="who-check">✓</div>
+                <div>
+                    <strong>Guru & pengajar</strong>
+                    <p>
+                        Sebagai bahan tambahan untuk aktiviti pembelajaran.
+                    </p>
+                </div>
+            </div>
+
+            <div class="who-item">
+                <div class="who-check">✓</div>
+                <div>
+                    <strong>Homeschooling</strong>
+                    <p>
+                        Untuk aktiviti pembelajaran yang lebih fleksibel.
+                    </p>
+                </div>
+            </div>
+
+            <div class="who-item">
+                <div class="who-check">✓</div>
+                <div>
+                    <strong>Aktiviti hujung minggu</strong>
+                    <p>
+                        Boleh digunakan sebagai aktiviti pembelajaran
+                        tambahan di rumah.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PRICING
+===================================================== -->
+
+<section class="section pricing">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <div class="badge">
+                Harga Bundle
+            </div>
+
+            <h2>
+                Lagi Banyak Set, Lagi Berbaloi
+            </h2>
+
+        </div>
+
+        <div class="pricing-box">
+
+            <table class="price-table">
+
+                <thead>
+                    <tr>
+                        <th>Bilangan Set</th>
+                        <th>Harga</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>1 Set</td>
+                        <td>RM1</td>
+                    </tr>
+
+                    <tr>
+                        <td>2 Set</td>
+                        <td>RM2</td>
+                    </tr>
+
+                    <tr>
+                        <td>3 Set</td>
+                        <td>RM3</td>
+                    </tr>
+
+                    <tr>
+                        <td>4 Set</td>
+                        <td>RM4</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+            <div class="price-note">
+                Pilih set yang anda mahu. Sistem akan mengira
+                harga bundle secara automatik berdasarkan jumlah
+                set yang dipilih.
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     HOW TO BUY
+===================================================== -->
+
+<section class="section" id="how-to-buy">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <div class="badge">
+                Cara Membeli
+            </div>
+
+            <h2>
+                Mudah Dalam 3 Langkah
+            </h2>
+
+        </div>
+
+        <div class="steps">
+
+            <div class="step">
+
+                <div class="step-number">1</div>
+
+                <h3>
+                    Pilih Worksheet
+                </h3>
+
+                <p>
+                    Pilih satu atau beberapa set yang anda perlukan.
+                </p>
+
+            </div>
+
+            <div class="step">
+
+                <div class="step-number">2</div>
+
+                <h3>
+                    Checkout
+                </h3>
+
+                <p>
+                    Masukkan maklumat anda dan teruskan pembayaran.
+                </p>
+
+            </div>
+
+            <div class="step">
+
+                <div class="step-number">3</div>
+
+                <h3>
+                    Terima Worksheet
+                </h3>
+
+                <p>
+                    Selepas pembayaran disahkan, worksheet boleh
+                    dihantar kepada pelanggan.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FAQ
+===================================================== -->
+
+<section class="section faq">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <div class="badge">
+                FAQ
+            </div>
+
+            <h2>
+                Soalan Lazim
+            </h2>
+
+        </div>
+
+        <div class="faq-list">
+
+            <div class="faq-item">
+
+                <button
+                    class="faq-question"
+                    onclick="toggleFAQ(this)"
+                >
+                    <span>
+                        Dalam format apa worksheet diberikan?
+                    </span>
+
+                    <span class="faq-icon">+</span>
+                </button>
+
+                <div class="faq-answer">
+                    Worksheet boleh disediakan dalam format PDF
+                    untuk memudahkan pelanggan mencetaknya.
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button
+                    class="faq-question"
+                    onclick="toggleFAQ(this)"
+                >
+                    <span>
+                        Boleh cetak berulang kali?
+                    </span>
+
+                    <span class="faq-icon">+</span>
+                </button>
+
+                <div class="faq-answer">
+                    Ya, fail digital boleh dicetak semula
+                    untuk kegunaan sendiri tertakluk kepada
+                    terma penggunaan produk anda.
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button
+                    class="faq-question"
+                    onclick="toggleFAQ(this)"
+                >
+                    <span>
+                        Boleh beli lebih daripada satu set?
+                    </span>
+
+                    <span class="faq-icon">+</span>
+                </button>
+
+                <div class="faq-answer">
+                    Ya. Pilih beberapa set dan sistem akan
+                    mengira harga bundle secara automatik.
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button
+                    class="faq-question"
+                    onclick="toggleFAQ(this)"
+                >
+                    <span>
+                        Adakah pembayaran sudah tersedia?
+                    </span>
+
+                    <span class="faq-icon">+</span>
+                </button>
+
+                <div class="faq-answer">
+                    Checkout menggunakan endpoint serverless
+                    <code>/.netlify/functions/create-payment</code>.
+                    Endpoint tersebut boleh disambungkan kepada ToyyibPay
+                    atau Billplz tanpa mendedahkan API secret di browser.
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button
+                    class="faq-question"
+                    onclick="toggleFAQ(this)"
+                >
+                    <span>
+                        Adakah fail terus dihantar secara automatik?
+                    </span>
+
+                    <span class="faq-icon">+</span>
+                </button>
+
+                <div class="faq-answer">
+                    Selepas payment disahkan oleh gateway melalui
+                    webhook, Netlify Function boleh digunakan untuk
+                    menghantar pautan PDF secara automatik kepada email
+                    pelanggan.
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FINAL CTA
+===================================================== -->
+
+<section class="section final-cta">
+
+    <div class="container">
+
+        <h2>
+            Mulakan Aktiviti Pembelajaran Hari Ini
+        </h2>
+
+        <p>
+            Pilih worksheet yang sesuai dan sediakan aktiviti
+            pembelajaran tambahan untuk anak.
+        </p>
+
+        <a
+            href="#products"
+            class="btn"
+        >
+            Pilih Worksheet
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <p>
+        © 2026 <strong>EduKids Worksheet</strong>.
+        All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<!-- =====================================================
+     STICKY CART
+===================================================== -->
+
+<div
+    class="cart-bar"
+    id="cartBar"
+>
+
+    <div class="cart-info">
+
+        <div id="cartCount">
+            0 set dipilih
+        </div>
+
+        <div class="cart-total" id="cartTotal">
+            RM0
+        </div>
+
+    </div>
+
+    <button
+        class="cart-btn"
+        onclick="openCheckout()"
+    >
+        Checkout
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     CHECKOUT MODAL
+===================================================== -->
+
+<div
+    class="modal"
+    id="checkoutModal"
+>
+
+    <div class="modal-box">
+
+        <button
+            class="modal-close"
+            onclick="closeCheckout()"
+            aria-label="Tutup checkout"
+        >
+            ×
+        </button>
+
+        <h2>
+            Checkout
+        </h2>
+
+        <p>
+            Semak pilihan anda sebelum meneruskan.
+        </p>
+
+        <div
+            class="checkout-summary"
+            id="checkoutSummary"
+        ></div>
+
+        <form
+            id="checkoutForm"
+            onsubmit="submitCheckout(event)"
+        >
+
+            <div class="form-group">
+
+                <label for="customerName">
+                    Nama
+                </label>
+
+                <input
+                    type="text"
+                    id="customerName"
+                    placeholder="Nama anda"
+                    autocomplete="name"
+                    maxlength="100"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="customerEmail">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="customerEmail"
+                    placeholder="email@example.com"
+                    autocomplete="email"
+                    maxlength="160"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="customerPhone">
+                    No. Telefon <span style="font-weight:400;color:#777">(pilihan)</span>
+                </label>
+
+                <input
+                    type="tel"
+                    id="customerPhone"
+                    placeholder="01X-XXXXXXX"
+                    autocomplete="tel"
+                    maxlength="25"
+                >
+
+            </div>
+
+            <div class="payment-method-box">
+                <div class="payment-method-title">Kaedah pembayaran</div>
+                <div class="payment-methods">
+                    <div class="payment-method">
+                        <strong>FPX / Online Banking</strong>
+                        Bayaran melalui gateway
+                    </div>
+                    <div class="payment-method">
+                        <strong>DuitNow / QR</strong>
+                        Jika disokong oleh gateway
+                    </div>
+                    <div class="payment-method">
+                        <strong>Kad</strong>
+                        Jika diaktifkan pada akaun gateway
+                    </div>
+                    <div class="payment-method">
+                        <strong>Wallet</strong>
+                        Jika tersedia pada gateway
+                    </div>
+                </div>
+            </div>
+
+            <label class="checkout-check">
+                <input type="checkbox" id="acceptTerms" required>
+                <span>Saya telah menyemak pilihan worksheet dan bersetuju dengan terma pembelian produk digital.</span>
+            </label>
+
+            <button
+                type="submit"
+                class="checkout-submit"
+                id="checkoutSubmit"
+            >
+                Bayar Sekarang
+            </button>
+
+            <div
+                class="checkout-status"
+                id="checkoutStatus"
+                role="status"
+                aria-live="polite"
+            ></div>
+
+        </form>
+
+        <div class="checkout-notice">
+            Pembayaran diproses oleh payment gateway. Maklumat API secret
+            tidak diletakkan dalam fail <code>index.html</code>; ia mesti
+            disimpan sebagai environment variable dalam Netlify Functions.
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     IMAGE LIGHTBOX
+===================================================== -->
+
+<div
+    class="lightbox"
+    id="lightbox"
+    onclick="closeLightbox()"
+>
+
+    <button
+        class="lightbox-close"
+        onclick="closeLightbox()"
+        aria-label="Tutup preview"
+    >
+        ×
+    </button>
+
+    <img
+        id="lightboxImage"
+        src=""
+        alt="Preview worksheet"
+    >
+
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+    /* ================================================
+       PRODUCT DATA
+    ================================================ */
+
+    const products = {
+
+        autisme: {
+            name: "Set Anak Autisme",
+            price: 1
+        },
+
+        membaca: {
+            name: "Set Anak Cepat Kenal Huruf & Membaca",
+            price: 1
+        },
+
+        motor: {
+            name: "Set Latihan Motor Skill & Focus",
+            price: 1
+        },
+
+        tahun1: {
+            name: "Set Latihan Tahap 1",
+            price: 1
+        }
+
+    };
+
+
+    let selectedProducts = [];
+
+
+    /* ================================================
+       BUNDLE PRICE
+    ================================================ */
+
+    function calculatePrice(count) {
+
+        if (count === 0) {
+            return 0;
+        }
+
+        if (count === 1) {
+            return 1;
+        }
+
+        if (count === 2) {
+            return 2;
+        }
+
+        if (count === 3) {
+            return 3;
+        }
+
+        if (count === 4) {
+            return 4;
+        }
+
+        return 4;
+    }
+
+
+    /* ================================================
+       SELECT PRODUCT
+    ================================================ */
+
+    function toggleProduct(productId) {
+
+        const card = document.querySelector(
+            `[data-product="${productId}"]`
+        );
+
+        const button = card.querySelector(".select-btn");
+
+        const index = selectedProducts.indexOf(productId);
+
+
+        if (index === -1) {
+
+            selectedProducts.push(productId);
+
+            card.classList.add("selected");
+
+            button.textContent = "✓ Dipilih";
+
+        } else {
+
+            selectedProducts.splice(index, 1);
+
+            card.classList.remove("selected");
+
+            button.textContent = "Pilih Set";
+
+        }
+
+
+        updateCart();
+
+    }
+
+
+    /* ================================================
+       UPDATE CART
+    ================================================ */
+
+    function updateCart() {
+
+        const count = selectedProducts.length;
+
+        const total = calculatePrice(count);
+
+        const cartBar = document.getElementById("cartBar");
+
+        const cartCount = document.getElementById("cartCount");
+
+        const cartTotal = document.getElementById("cartTotal");
+
+
+        if (count === 0) {
+
+            cartBar.classList.remove("show");
+
+            return;
+
+        }
+
+
+        cartBar.classList.add("show");
+
+
+        cartCount.textContent =
+            count === 1
+                ? "1 set dipilih"
+                : `${count} set dipilih`;
+
+
+        cartTotal.textContent =
+            `RM${total}`;
+
+    }
+
+
+    /* ================================================
+       PREVIEW IMAGE
+    ================================================ */
+
+    function changePreview(thumbnail, imagePath) {
+
+        const productCard =
+            thumbnail.closest(".product-card");
+
+        const mainImage =
+            productCard.querySelector(".main-image");
+
+
+        mainImage.src = imagePath;
+
+
+        const thumbnails =
+            productCard.querySelectorAll(".thumbnail");
+
+
+        thumbnails.forEach(item => {
+
+            item.classList.remove("active");
+
+        });
+
+
+        thumbnail.classList.add("active");
+
+    }
+
+
+    /* ================================================
+       LIGHTBOX
+    ================================================ */
+
+    function openLightbox(imageSrc) {
+
+        const lightbox =
+            document.getElementById("lightbox");
+
+        const lightboxImage =
+            document.getElementById("lightboxImage");
+
+
+        lightboxImage.src = imageSrc;
+
+        lightbox.classList.add("show");
+
+        document.body.style.overflow = "hidden";
+
+    }
+
+
+    function closeLightbox() {
+
+        document
+            .getElementById("lightbox")
+            .classList.remove("show");
+
+        document.body.style.overflow = "";
+
+    }
+
+
+    /* ================================================
+       CHECKOUT
+    ================================================ */
+
+    function openCheckout() {
+
+        if (selectedProducts.length === 0) {
+
+            alert("Sila pilih sekurang-kurangnya satu set.");
+
+            return;
+
+        }
+
+
+        const summary =
+            document.getElementById("checkoutSummary");
+
+
+        let html = "";
+
+
+        selectedProducts.forEach(productId => {
+
+            const product =
+                products[productId];
+
+
+            html += `
+
+                <div class="checkout-row">
+
+                    <span>
+                        ${product.name}
+                    </span>
+
+                    <strong>
+                        RM${product.price}
+                    </strong>
+
+                </div>
+
+            `;
+
+        });
+
+
+        const total =
+            calculatePrice(selectedProducts.length);
+
+
+        html += `
+
+            <div class="checkout-row checkout-total">
+
+                <span>
+                    Jumlah
+                </span>
+
+                <strong>
+                    RM${total}
+                </strong>
+
+            </div>
+
+        `;
+
+
+        summary.innerHTML = html;
+
+
+        document
+            .getElementById("checkoutModal")
+            .classList.add("show");
+
+        document.body.style.overflow = "hidden";
+
+    }
+
+
+    function closeCheckout() {
+
+        document
+            .getElementById("checkoutModal")
+            .classList.remove("show");
+
+        document.body.style.overflow = "";
+
+    }
+
+
+    /* ================================================
+       PAYMENT GATEWAY CONFIG
+    ================================================ */
+
+    /*
+       Tukar nilai ini apabila anda memilih gateway:
+
+       "toyyibpay"  -> Netlify Function akan memanggil ToyyibPay
+       "billplz"    -> Netlify Function akan memanggil Billplz
+
+       API secret / X-API-KEY / collection ID dan maklumat rahsia lain
+       JANGAN dimasukkan di sini. Simpan semuanya dalam Netlify
+       Environment Variables dan gunakan dari serverless function.
+    */
+    const PAYMENT_GATEWAY = "toyyibpay";
+
+
+    /* ================================================
+       CHECKOUT SUBMIT
+    ================================================ */
+
+    async function submitCheckout(event) {
+
+        event.preventDefault();
+
+        if (selectedProducts.length === 0) {
+            alert("Sila pilih sekurang-kurangnya satu set.");
+            return;
+        }
+
+        const name = document.getElementById("customerName").value.trim();
+        const email = document.getElementById("customerEmail").value.trim();
+        const phone = document.getElementById("customerPhone").value.trim();
+        const accepted = document.getElementById("acceptTerms").checked;
+        const submitButton = document.getElementById("checkoutSubmit");
+        const status = document.getElementById("checkoutStatus");
+
+        if (!name || !email || !accepted) {
+            return;
+        }
+
+        /*
+           SECURITY IMPORTANT:
+           Browser hanya menghantar product IDs.
+           Jumlah RM TIDAK dipercayai dari browser.
+           create-payment.js mesti mengira semula harga berdasarkan
+           product IDs di server sebelum membuat bill/payment.
+        */
+        const payload = {
+            gateway: PAYMENT_GATEWAY,
+            products: [...selectedProducts],
+            customer: {
+                name,
+                email,
+                phone
+            },
+            return_url: `${window.location.origin}/payment-success.html`,
+            cancel_url: `${window.location.href.split("#")[0]}#products`
+        };
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Menyediakan pembayaran...";
+        status.className = "checkout-status show loading";
+        status.textContent = "Sila tunggu. Anda akan dibawa ke halaman pembayaran yang selamat.";
+
+        try {
+
+            const response = await fetch("/.netlify/functions/create-payment", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.json().catch(() => ({}));
+
+            if (!response.ok || !data.payment_url) {
+                throw new Error(data.error || "Pembayaran tidak dapat dimulakan.");
+            }
+
+            /*
+               Backend perlu memulangkan JSON seperti:
+               { "payment_url": "https://..." }
+
+               Untuk ToyyibPay, payment_url biasanya ialah URL bill.
+               Untuk Billplz, payment_url biasanya ialah URL bill.
+            */
+            window.location.href = data.payment_url;
+
+        } catch (error) {
+
+            console.error("Payment error:", error);
+            status.className = "checkout-status show error";
+            status.textContent = error.message || "Ralat berlaku. Sila cuba lagi.";
+            submitButton.disabled = false;
+            submitButton.textContent = "Bayar Sekarang";
+
+        }
+
+    }
+
+    /* ================================================
+       FAQ
+    ================================================ */
+
+    function toggleFAQ(button) {
+
+        const item =
+            button.closest(".faq-item");
+
+
+        const icon =
+            button.querySelector(".faq-icon");
+
+
+        const isOpen =
+            item.classList.contains("open");
+
+
+        document
+            .querySelectorAll(".faq-item")
+            .forEach(faq => {
+
+                faq.classList.remove("open");
+
+                const faqIcon =
+                    faq.querySelector(".faq-icon");
+
+                if (faqIcon) {
+                    faqIcon.textContent = "+";
+                }
+
+            });
+
+
+        if (!isOpen) {
+
+            item.classList.add("open");
+
+            icon.textContent = "−";
+
+        }
+
+    }
+
+
+    /* ================================================
+       ESC KEY
+    ================================================ */
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Escape") {
+
+                closeCheckout();
+
+                closeLightbox();
+
+            }
+
+        }
+    );
+
+
+    /* ================================================
+       CLICK OUTSIDE CHECKOUT
+    ================================================ */
+
+    document
+        .getElementById("checkoutModal")
+        .addEventListener(
+            "click",
+            function(event) {
+
+                if (event.target === this) {
+
+                    closeCheckout();
+
+                }
+
+            }
+        );
+
+
+    /* ================================================
+       CLICK OUTSIDE LIGHTBOX
+    ================================================ */
+
+    document
+        .getElementById("lightbox")
+        .addEventListener(
+            "click",
+            function(event) {
+
+                if (event.target === this) {
+
+                    closeLightbox();
+
+                }
+
+            }
+        );
+
+</script>
+
+</body>
+</html>
+```
