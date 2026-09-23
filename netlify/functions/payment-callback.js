@@ -59,13 +59,43 @@ async function sendConfirmationEmail(customer, downloadLinks) {
     }
 }
 
+// ToyyibPay hantar callback dalam format multipart/form-data (bukan
+// x-www-form-urlencoded), jadi URLSearchParams tak reti baca terus.
+// Parser ringkas ni extract field name="x" -> value dari raw body.
+function parseMultipartFormData(rawBody, contentType) {
+    const boundaryMatch = contentType.match(/boundary=(.+)$/);
+    if (!boundaryMatch) return {};
+
+    const boundary = "--" + boundaryMatch[1].trim();
+    const parts = rawBody
+        .split(boundary)
+        .filter((p) => p.trim() && p.trim() !== "--");
+
+    const fields = {};
+
+    for (const part of parts) {
+        const splitIndex = part.indexOf("\r\n\r\n");
+        if (splitIndex === -1) continue;
+
+        const headerSection = part.slice(0, splitIndex);
+        let value = part.slice(splitIndex + 4);
+
+        const nameMatch = headerSection.match(/name="([^"]+)"/);
+        if (!nameMatch) continue;
+
+        value = value.replace(/\r\n--$/, "").trim();
+        fields[nameMatch[1]] = value;
+    }
+
+    return fields;
+}
+
 exports.handler = async (event) => {
     connectLambda(event);
 
     // --- DEBUG SEMENTARA: buang balik lepas isu ni selesai ---
     console.log("Content-Type:", event.headers["content-type"]);
     console.log("isBase64Encoded:", event.isBase64Encoded);
-    console.log("Raw body:", event.body);
     // ----------------------------------------------------------
 
     if (event.httpMethod !== "POST") {
@@ -73,11 +103,29 @@ exports.handler = async (event) => {
         return { statusCode: 405, body: "Method Not Allowed" };
     }
 
-    const params = new URLSearchParams(event.body);
-    const status = params.get("status");
-    const orderId = params.get("order_id");
-    const refno = params.get("refno");
-    const receivedHash = params.get("hash");
+    // ToyyibPay hantar body sebagai multipart/form-data, dan Netlify
+    // encode ia sebagai base64 (isBase64Encoded: true) - decode dulu.
+    const rawBody = event.isBase64Encoded
+        ? Buffer.from(event.body, "base64").toString("utf-8")
+        : event.body;
+
+    const contentType = event.headers["content-type"] || "";
+
+    let status, orderId, refno, receivedHash;
+
+    if (contentType.includes("multipart/form-data")) {
+        const fields = parseMultipartFormData(rawBody, contentType);
+        status = fields.status;
+        orderId = fields.order_id;
+        refno = fields.refno;
+        receivedHash = fields.hash;
+    } else {
+        const params = new URLSearchParams(rawBody);
+        status = params.get("status");
+        orderId = params.get("order_id");
+        refno = params.get("refno");
+        receivedHash = params.get("hash");
+    }
 
     // --- DEBUG SEMENTARA ---
     console.log("Parsed:", { status, orderId, refno, receivedHash });
