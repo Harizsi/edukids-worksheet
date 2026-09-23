@@ -34,10 +34,10 @@ const PRODUCTS = {
 function calculatePrice(count) {
     if (count === 0) return 0;
     if (count === 1) return 1;
-    if (count === 2) return 1.5;
-    if (count === 3) return 2;
-    if (count === 4) return 2.5;
-    return 2.5;
+    if (count === 2) return 2;
+    if (count === 3) return 3;
+    if (count === 4) return 4;
+    return 4;
 }
 
 module.exports = { PRODUCTS, calculatePrice };
