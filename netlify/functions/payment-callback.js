@@ -94,8 +94,7 @@ exports.handler = async (event) => {
     connectLambda(event);
 
     // --- DEBUG SEMENTARA: buang balik lepas isu ni selesai ---
-    console.log("Content-Type:", event.headers["content-type"]);
-    console.log("isBase64Encoded:", event.isBase64Encoded);
+
     // ----------------------------------------------------------
 
     if (event.httpMethod !== "POST") {
@@ -128,7 +127,7 @@ exports.handler = async (event) => {
     }
 
     // --- DEBUG SEMENTARA ---
-    console.log("Parsed:", { status, orderId, refno, receivedHash });
+
     // -----------------------
 
     if (!orderId || !receivedHash) {
