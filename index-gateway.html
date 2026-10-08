@@ -251,13 +251,6 @@
             max-height: 600px;
         }
 
-        .video-wrapper iframe {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            border: 0;
-            display: block;
-        }
-
         /* =========================
            PRODUCTS
         ========================= */
@@ -899,101 +892,6 @@
         }
 
         /* =========================
-           DIRECT PAYMENT (QR)
-        ========================= */
-
-        .pay-box {
-            margin: 0 0 20px;
-            padding: 16px;
-            border: 1px solid #e5e5e5;
-            border-radius: 12px;
-            background: #fafafa;
-        }
-
-        .pay-step {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-
-        .pay-num {
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            background: #ff7043;
-            color: white;
-            font-size: 14px;
-            font-weight: bold;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .qr-img {
-            width: min(260px, 80%);
-            margin: 0 auto 14px;
-            border-radius: 12px;
-            background: white;
-            border: 1px solid #eee;
-            padding: 8px;
-        }
-
-        .bank-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 7px 0;
-            border-top: 1px solid #eee;
-            font-size: 14px;
-        }
-
-        .bank-row span {
-            width: 90px;
-            color: #777;
-            flex-shrink: 0;
-        }
-
-        .bank-row strong {
-            flex: 1;
-            overflow-wrap: anywhere;
-        }
-
-        .pay-amount {
-            font-size: 20px;
-            color: #ff7043;
-        }
-
-        .copy-btn {
-            border: 1px solid #ddd;
-            background: white;
-            border-radius: 8px;
-            padding: 6px 12px;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            min-height: 34px;
-            flex-shrink: 0;
-        }
-
-        .pay-hint {
-            margin-top: 10px;
-            font-size: 12.5px;
-            color: #777;
-        }
-
-        .wa-btn {
-            background: #25d366;
-        }
-
-        .checkout-status.loading {
-            background: #eefaf2;
-            color: #1f6b3a;
-            border: 1px solid #c8eed6;
-        }
-
-        /* =========================
            LIGHTBOX
         ========================= */
 
@@ -1535,21 +1433,30 @@
             </h2>
 
             <p>
-                Tengok contoh isi worksheet sebelum anda membeli.
+                Tunjukkan contoh worksheet anda melalui video
+                pendek supaya ibu bapa boleh melihat kandungan
+                sebelum membeli.
             </p>
 
         </div>
 
         <div class="video-wrapper">
 
-            <iframe
-                src="https://www.youtube-nocookie.com/embed/dVIg8knnWaY?rel=0&modestbranding=1&playsinline=1"
-                title="Contoh worksheet EduKids"
-                loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-            ></iframe>
+            <video
+                controls
+                playsinline
+                preload="metadata"
+                poster="images/video-cover.jpg"
+            >
+
+                <source
+                    src="video/demo.mp4"
+                    type="video/mp4"
+                >
+
+                Browser anda tidak menyokong video HTML5.
+
+            </video>
 
         </div>
 
@@ -2212,7 +2119,7 @@
                 </h3>
 
                 <p>
-                    Bayar melalui DuitNow QR, kemudian hantar bukti bayaran di WhatsApp.
+                    Masukkan maklumat anda dan teruskan pembayaran.
                 </p>
 
             </div>
@@ -2226,8 +2133,8 @@
                 </h3>
 
                 <p>
-                    Selepas pembayaran disahkan, link download PDF
-                    dihantar melalui WhatsApp.
+                    Selepas pembayaran disahkan, worksheet boleh
+                    dihantar kepada pelanggan.
                 </p>
 
             </div>
@@ -2332,16 +2239,17 @@
                     onclick="toggleFAQ(this)"
                 >
                     <span>
-                        Bagaimana cara bayar?
+                        Adakah pembayaran sudah tersedia?
                     </span>
 
                     <span class="faq-icon">+</span>
                 </button>
 
                 <div class="faq-answer">
-                    Scan QR DuitNow atau transfer terus ke akaun bank kami.
-                    Kemudian tekan butang hantar order untuk membuka WhatsApp
-                    dan lampirkan screenshot bukti bayaran.
+                    Checkout menggunakan endpoint serverless
+                    <code>/.netlify/functions/create-payment</code>.
+                    Endpoint tersebut boleh disambungkan kepada ToyyibPay
+                    atau Billplz tanpa mendedahkan API secret di browser.
                 </div>
 
             </div>
@@ -2354,16 +2262,17 @@
                     onclick="toggleFAQ(this)"
                 >
                     <span>
-                        Bila saya akan terima worksheet?
+                        Adakah fail terus dihantar secara automatik?
                     </span>
 
                     <span class="faq-icon">+</span>
                 </button>
 
                 <div class="faq-answer">
-                    Link download akan dihantar melalui WhatsApp selepas
-                    bukti bayaran disemak. Biasanya dalam masa yang singkat
-                    pada waktu operasi.
+                    Selepas payment disahkan oleh gateway melalui
+                    webhook, Netlify Function boleh digunakan untuk
+                    menghantar pautan PDF secara automatik kepada email
+                    pelanggan.
                 </div>
 
             </div>
@@ -2473,7 +2382,7 @@
         </h2>
 
         <p>
-            Semak pilihan anda, bayar melalui DuitNow QR, kemudian hantar bukti di WhatsApp.
+            Semak pilihan anda sebelum meneruskan.
         </p>
 
         <div
@@ -2481,70 +2390,10 @@
             id="checkoutSummary"
         ></div>
 
-        <div class="pay-box">
-
-            <div class="pay-step">
-                <span class="pay-num">1</span>
-                <strong>Scan QR DuitNow atau transfer bank</strong>
-            </div>
-
-            <img
-                class="qr-img"
-                src="images/duitnow-qr.png"
-                alt="DuitNow QR"
-            >
-
-            <div class="bank-row">
-                <span>Bank</span>
-                <strong id="payBank"></strong>
-            </div>
-
-            <div class="bank-row">
-                <span>Nama akaun</span>
-                <strong id="payAccName"></strong>
-            </div>
-
-            <div class="bank-row">
-                <span>No. akaun</span>
-                <strong id="payAccNo"></strong>
-                <button
-                    type="button"
-                    class="copy-btn"
-                    onclick="copyText(document.getElementById('payAccNo').textContent, this)"
-                >Salin</button>
-            </div>
-
-            <div class="bank-row">
-                <span>Jumlah</span>
-                <strong id="payAmount" class="pay-amount"></strong>
-            </div>
-
-            <div class="bank-row">
-                <span>Rujukan</span>
-                <strong id="payRef"></strong>
-                <button
-                    type="button"
-                    class="copy-btn"
-                    onclick="copyText(document.getElementById('payRef').textContent, this)"
-                >Salin</button>
-            </div>
-
-            <p class="pay-hint">
-                Letakkan No. Rujukan di ruang "Reference / Payment details" semasa bayar
-                supaya senang kami semak.
-            </p>
-
-        </div>
-
         <form
             id="checkoutForm"
             onsubmit="submitCheckout(event)"
         >
-
-            <div class="pay-step">
-                <span class="pay-num">2</span>
-                <strong>Isi maklumat & hantar bukti di WhatsApp</strong>
-            </div>
 
             <div class="form-group">
 
@@ -2566,7 +2415,7 @@
             <div class="form-group">
 
                 <label for="customerEmail">
-                    Email <span style="font-weight:400;color:#777">(pilihan, sebagai sandaran)</span>
+                    Email
                 </label>
 
                 <input
@@ -2575,21 +2424,48 @@
                     placeholder="email@example.com"
                     autocomplete="email"
                     maxlength="160"
+                    required
                 >
 
             </div>
 
+            <div class="form-group">
+
+                <label for="customerPhone">
+                    No. Telefon <span style="font-weight:400;color:#777">(pilihan)</span>
+                </label>
+
+                <input
+                    type="tel"
+                    id="customerPhone"
+                    placeholder="01X-XXXXXXX"
+                    autocomplete="tel"
+                    maxlength="25"
+                >
+
+            </div>
+
+            <div class="payment-method-box">
+                <div class="payment-method-title">Kaedah pembayaran</div>
+                <div class="payment-methods">
+                    <div class="payment-method">
+                        <strong>FPX / Online Banking</strong>
+                        Bayaran melalui gateway
+                    </div>
+                </div>
+            </div>
+
             <label class="checkout-check">
-                <input type="checkbox" id="confirmPaid" required>
-                <span>Saya sudah buat pembayaran dan akan lampirkan screenshot bukti bayaran di WhatsApp.</span>
+                <input type="checkbox" id="acceptTerms" required>
+                <span>Saya telah menyemak pilihan worksheet dan bersetuju dengan terma pembelian produk digital.</span>
             </label>
 
             <button
                 type="submit"
-                class="checkout-submit wa-btn"
+                class="checkout-submit"
                 id="checkoutSubmit"
             >
-                Hantar Order di WhatsApp
+                Bayar Sekarang
             </button>
 
             <div
@@ -2602,7 +2478,9 @@
         </form>
 
         <div class="checkout-notice">
-            Link download PDF akan dihantar melalui WhatsApp selepas pembayaran disahkan.
+            Pembayaran diproses oleh payment gateway. Maklumat API secret
+            tidak diletakkan dalam fail <code>index.html</code>; ia mesti
+            disimpan sebagai environment variable dalam Netlify Functions.
         </div>
 
     </div>
@@ -2919,8 +2797,6 @@
 
 
         summary.innerHTML = html;
-        renderPayment();
-        document.getElementById("checkoutStatus").className = "checkout-status";
 
 
         document
@@ -2944,67 +2820,27 @@
 
 
     /* ================================================
-       PEMBAYARAN DIRECT (DuitNow QR / Bank Transfer)
+       PAYMENT GATEWAY CONFIG
     ================================================ */
 
-    /* >>> TUKAR 4 NILAI INI <<< */
-    const WHATSAPP_NUMBER = "601154415001";   // format antarabangsa, tanpa + atau 0 di depan. cth: 60123456789
-    const BANK_NAME       = "Maybank";       // nama bank akaun anda
-    const ACCOUNT_NAME    = "Muhammad Hariz bin Saipul Islam";
-    const ACCOUNT_NO      = "162731045790";
+    /*
+       Tukar nilai ini apabila anda memilih gateway:
 
-    let currentOrderRef = "";
+       "toyyibpay"  -> Netlify Function akan memanggil ToyyibPay
+       "billplz"    -> Netlify Function akan memanggil Billplz
 
-    function makeOrderRef() {
-        const d = new Date();
-        const yy = String(d.getFullYear()).slice(2);
-        const mm = String(d.getMonth() + 1).padStart(2, "0");
-        const dd = String(d.getDate()).padStart(2, "0");
-        const rand = Math.random().toString(36).slice(2, 6).toUpperCase();
-        return `EK${yy}${mm}${dd}-${rand}`;
-    }
-
-    function renderPayment() {
-
-        const total = calculatePrice(selectedProducts.length);
-
-        currentOrderRef = makeOrderRef();
-
-        document.getElementById("payAmount").textContent = `RM${total}`;
-        document.getElementById("payRef").textContent = currentOrderRef;
-        document.getElementById("payBank").textContent = BANK_NAME;
-        document.getElementById("payAccName").textContent = ACCOUNT_NAME;
-        document.getElementById("payAccNo").textContent = ACCOUNT_NO;
-
-    }
-
-    function copyText(text, button) {
-
-        const done = () => {
-            const old = button.textContent;
-            button.textContent = "Disalin ✓";
-            setTimeout(() => { button.textContent = old; }, 1500);
-        };
-
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(text).then(done).catch(() => {});
-        } else {
-            const t = document.createElement("textarea");
-            t.value = text;
-            document.body.appendChild(t);
-            t.select();
-            try { document.execCommand("copy"); done(); } catch (e) {}
-            document.body.removeChild(t);
-        }
-
-    }
+       API secret / X-API-KEY / collection ID dan maklumat rahsia lain
+       JANGAN dimasukkan di sini. Simpan semuanya dalam Netlify
+       Environment Variables dan gunakan dari serverless function.
+    */
+    const PAYMENT_GATEWAY = "toyyibpay";
 
 
     /* ================================================
-       HANTAR ORDER KE WHATSAPP
+       CHECKOUT SUBMIT
     ================================================ */
 
-    function submitCheckout(event) {
+    async function submitCheckout(event) {
 
         event.preventDefault();
 
@@ -3015,44 +2851,76 @@
 
         const name = document.getElementById("customerName").value.trim();
         const email = document.getElementById("customerEmail").value.trim();
-        const paid = document.getElementById("confirmPaid").checked;
+        const phone = document.getElementById("customerPhone").value.trim();
+        const accepted = document.getElementById("acceptTerms").checked;
+        const submitButton = document.getElementById("checkoutSubmit");
+        const status = document.getElementById("checkoutStatus");
 
-        if (!name || !paid) {
+        if (!name || !email || !accepted) {
             return;
         }
 
-        const total = calculatePrice(selectedProducts.length);
+        /*
+           SECURITY IMPORTANT:
+           Browser hanya menghantar product IDs.
+           Jumlah RM TIDAK dipercayai dari browser.
+           create-payment.js mesti mengira semula harga berdasarkan
+           product IDs di server sebelum membuat bill/payment.
+        */
+        const payload = {
+            gateway: PAYMENT_GATEWAY,
+            products: [...selectedProducts],
+            customer: {
+                name,
+                email,
+                phone
+            },
+            return_url: `${window.location.origin}/payment-success.html`,
+            cancel_url: `${window.location.href.split("#")[0]}#products`
+        };
 
-        const lines = selectedProducts.map(
-            (id, i) => `${i + 1}. ${products[id].name}`
-        );
-
-        const message =
-`Salam, saya nak order worksheet EduKids.
-
-No. Order: ${currentOrderRef}
-Nama: ${name}${email ? `\nEmail: ${email}` : ""}
-
-Set dipilih:
-${lines.join("\n")}
-
-Jumlah dibayar: RM${total}
-
-Saya dah bayar melalui DuitNow QR / bank transfer. Bukti pembayaran saya lampirkan di bawah. Terima kasih!`;
-
-        const url =
-            `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-
-        const status = document.getElementById("checkoutStatus");
-
+        submitButton.disabled = true;
+        submitButton.textContent = "Menyediakan pembayaran...";
         status.className = "checkout-status show loading";
-        status.textContent =
-            "WhatsApp akan dibuka. Jangan lupa lampirkan screenshot bukti bayaran sebelum tekan hantar.";
+        status.textContent = "Sila tunggu. Anda akan dibawa ke halaman pembayaran yang selamat.";
 
-        window.open(url, "_blank", "noopener");
+        try {
+
+            const response = await fetch("/.netlify/functions/create-payment", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.json().catch(() => ({}));
+
+            if (!response.ok || !data.payment_url) {
+                throw new Error(data.error || "Pembayaran tidak dapat dimulakan.");
+            }
+
+            /*
+               Backend perlu memulangkan JSON seperti:
+               { "payment_url": "https://..." }
+
+               Untuk ToyyibPay, payment_url biasanya ialah URL bill.
+               Untuk Billplz, payment_url biasanya ialah URL bill.
+            */
+            window.location.href = data.payment_url;
+
+        } catch (error) {
+
+            console.error("Payment error:", error);
+            status.className = "checkout-status show error";
+            status.textContent = error.message || "Ralat berlaku. Sila cuba lagi.";
+            submitButton.disabled = false;
+            submitButton.textContent = "Bayar Sekarang";
+
+        }
 
     }
-
 
     /* ================================================
        FAQ
@@ -3162,3 +3030,4 @@ Saya dah bayar melalui DuitNow QR / bank transfer. Bukti pembayaran saya lampirk
 
 </body>
 </html>
+```
