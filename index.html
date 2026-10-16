@@ -9,7 +9,7 @@
 
     <meta
         name="description"
-        content="Koleksi worksheet digital untuk membantu kanak-kanak belajar, fokus, mengenal huruf, membaca dan mengembangkan kemahiran motor."
+        content="Koleksi worksheet digital untuk membantu kanak-kanak belajar, fokus, mengenal huruf, nombor, bentuk, membaca dan mengembangkan kemahiran motor."
     >
 
     <style>
@@ -273,6 +273,7 @@
         }
 
         .product-card {
+            position: relative;
             background: white;
             border: 2px solid #eee;
             border-radius: 20px;
@@ -287,6 +288,24 @@
 
         .product-card:hover {
             transform: translateY(-3px);
+        }
+
+        .product-card.featured {
+            border-color: #ffb86b;
+        }
+
+        .product-ribbon {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            z-index: 2;
+            background: #ff7043;
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 50px;
+            box-shadow: 0 4px 12px rgba(255, 112, 67, 0.35);
         }
 
         .product-content {
@@ -376,6 +395,14 @@
             font-size: 22px;
             font-weight: 800;
             color: #ff7043;
+        }
+
+        .product-price .old-price {
+            font-size: 15px;
+            font-weight: 400;
+            color: #999;
+            text-decoration: line-through;
+            margin-right: 6px;
         }
 
         .select-btn {
@@ -503,6 +530,19 @@
         .price-table th:last-child {
             text-align: right;
             font-weight: 700;
+        }
+
+        .price-table tr.bundle-row td {
+            background: #fff4ec;
+            color: #d9501f;
+            font-weight: 700;
+        }
+
+        .price-table small {
+            display: block;
+            font-weight: 400;
+            color: #777;
+            font-size: 13px;
         }
 
         .price-note {
@@ -759,6 +799,12 @@
 
         .checkout-row span {
             overflow-wrap: anywhere;
+        }
+
+        .checkout-sub {
+            padding: 0 0 6px 12px;
+            font-size: 13px;
+            color: #777;
         }
 
         .checkout-total {
@@ -1398,15 +1444,14 @@
             </div>
 
             <h1>
-                Belajar Jadi Lebih
-                <span>Seronok</span>
-                & Terarah
+                <span>Print Je</span>
+                Anak Terus Boleh Mula Aktiviti di Rumah
             </h1>
 
             <p>
-                Koleksi worksheet yang direka untuk membantu kanak-kanak
-                berlatih membaca, mengenal huruf, meningkatkan fokus,
-                kemahiran motor dan asas pembelajaran Tahun 1–3.
+                Koleksi worksheet yang direka untuk membantu kanak-kanak 3-6 tahun 
+                berlatih membaca, mengenal huruf, nombor dan bentuk,
+                meningkatkan fokus serta kemahiran motor halus.
             </p>
 
             <div class="hero-buttons">
@@ -1426,7 +1471,7 @@
         <div class="hero-image">
 
             <img
-                src="images/hero.jpeg"
+                id="heroImage"
                 alt="EduKids Worksheet"
                 loading="eager"
             >
@@ -1543,7 +1588,7 @@
         <div class="video-wrapper">
 
             <iframe
-                src="https://www.youtube-nocookie.com/embed/dVIg8knnWaY?rel=0&modestbranding=1&playsinline=1"
+                id="sampleVideo"
                 title="Contoh worksheet EduKids"
                 loading="lazy"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -1577,8 +1622,8 @@
             </h2>
 
             <p>
-                Anda boleh pilih satu atau beberapa set.
-                Semakin banyak set dipilih, semakin berbaloi.
+                Pilih satu atau beberapa set, atau ambil Set Bundle
+                untuk dapat semua set beserta bonus buku aktiviti.
             </p>
 
         </div>
@@ -1591,16 +1636,15 @@
 
             <div
                 class="product-card"
-                data-product="autisme"
-                data-price="15"
+                data-product="membaca"
             >
 
                 <div class="main-preview">
 
                     <img
                         class="main-image"
-                        src="images/autisme-1.png"
-                        alt="Set Anak Autisme"
+                        data-product-image="membaca"
+                        alt="Set Kenal Huruf dan Membaca"
                         loading="eager"
                         onclick="openLightbox(this.src)"
                     >
@@ -1609,10 +1653,10 @@
 
                         <div
                             class="thumbnail active"
-                            onclick="changePreview(this, 'images/autisme-1.png')"
+                            onclick="changePreview(this, 'membaca', 0)"
                         >
                             <img
-                                src="images/autisme-1.png"
+                                data-thumb="membaca" data-index="0"
                                 alt=""
                                 loading="lazy"
                             >
@@ -1620,10 +1664,10 @@
 
                         <div
                             class="thumbnail"
-                            onclick="changePreview(this, 'images/autisme-2.png')"
+                            onclick="changePreview(this, 'membaca', 1)"
                         >
                             <img
-                                src="images/autisme-2.png"
+                                data-thumb="membaca" data-index="1"
                                 alt=""
                                 loading="lazy"
                             >
@@ -1631,10 +1675,10 @@
 
                         <div
                             class="thumbnail"
-                            onclick="changePreview(this, 'images/autisme-3.png')"
+                            onclick="changePreview(this, 'membaca', 2)"
                         >
                             <img
-                                src="images/autisme-3.png"
+                                data-thumb="membaca" data-index="2"
                                 alt=""
                                 loading="lazy"
                             >
@@ -1647,121 +1691,15 @@
 
                 <div class="product-content">
 
-                    <h3 class="product-title">
-                        Set Anak Autisme
-                    </h3>
+                    <h3 class="product-title" data-bind="name:membaca"></h3>
 
-                    <p class="product-description">
-                        Aktiviti mudah dan tersusun untuk pembelajaran serta
-                        latihan fokus di rumah atau bersama guru.
-                    </p>
+                    <p class="product-description" data-bind="desc:membaca"></p>
 
-                    <ul class="product-features">
-                        <li>Coloring & Dot to Dot</li>
-                        <li>Scissors Cutting & Tracing</li>
-                        <li>Melatih fokus dan koordinasi tangan & mata</li>
-                    </ul>
+                    <ul class="product-features" data-features="membaca"></ul>
 
                     <div class="product-bottom">
 
-                        <div class="product-price">
-                            RM15
-                        </div>
-
-                        <button
-                            class="select-btn"
-                            onclick="toggleProduct('autisme')"
-                        >
-                            Pilih Set
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- PRODUCT 2 -->
-
-            <div
-                class="product-card"
-                data-product="membaca"
-                data-price="15"
-            >
-
-                <div class="main-preview">
-
-                    <img
-                        class="main-image"
-                        src="images/membaca-1.png"
-                        alt="Set Anak Cepat Kenal Huruf dan Membaca"
-                        loading="lazy"
-                        onclick="openLightbox(this.src)"
-                    >
-
-                    <div class="thumbnail-row">
-
-                        <div
-                            class="thumbnail active"
-                            onclick="changePreview(this, 'images/membaca-1.png')"
-                        >
-                            <img
-                                src="images/membaca-1.png"
-                                alt=""
-                                loading="lazy"
-                            >
-                        </div>
-
-                        <div
-                            class="thumbnail"
-                            onclick="changePreview(this, 'images/membaca-2.png')"
-                        >
-                            <img
-                                src="images/membaca-2.png"
-                                alt=""
-                                loading="lazy"
-                            >
-                        </div>
-
-                        <div
-                            class="thumbnail"
-                            onclick="changePreview(this, 'images/membaca-3.png')"
-                            >
-                            <img
-                                src="images/membaca-3.png"
-                                alt=""
-                                loading="lazy"
-                            >
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="product-content">
-
-                    <h3 class="product-title">
-                        Set Anak Cepat Kenal Huruf & Membaca
-                    </h3>
-
-                    <p class="product-description">
-                        Bina asas membaca melalui aktiviti huruf, bunyi, nombor,
-                        bentuk dan pengecaman yang mudah.
-                    </p>
-
-                    <ul class="product-features">
-                        <li>Flash Card, Phonics & Jawi</li>
-                        <li>Matching Alphabets, Numbers & Shapes</li>
-                        <li>Coloring & Tracing</li>
-                    </ul>
-
-                    <div class="product-bottom">
-
-                        <div class="product-price">
-                            RM15
-                        </div>
+                        <div class="product-price" data-bind="singlePrice"></div>
 
                         <button
                             class="select-btn"
@@ -1777,20 +1715,19 @@
             </div>
 
 
-            <!-- PRODUCT 3 -->
+            <!-- PRODUCT 2 -->
 
             <div
                 class="product-card"
                 data-product="motor"
-                data-price="15"
             >
 
                 <div class="main-preview">
 
                     <img
                         class="main-image"
-                        src="images/motor-1.jpg"
-                        alt="Set Latihan Motor Skill dan Focus"
+                        data-product-image="motor"
+                        alt="Set Motor Halus dan Focus"
                         loading="lazy"
                         onclick="openLightbox(this.src)"
                     >
@@ -1799,10 +1736,10 @@
 
                         <div
                             class="thumbnail active"
-                            onclick="changePreview(this, 'images/motor-1.jpg')"
+                            onclick="changePreview(this, 'motor', 0)"
                         >
                             <img
-                                src="images/motor-1.jpg"
+                                data-thumb="motor" data-index="0"
                                 alt=""
                                 loading="lazy"
                             >
@@ -1810,10 +1747,10 @@
 
                         <div
                             class="thumbnail"
-                            onclick="changePreview(this, 'images/motor-2.png')"
+                            onclick="changePreview(this, 'motor', 1)"
                         >
                             <img
-                                src="images/motor-2.png"
+                                data-thumb="motor" data-index="1"
                                 alt=""
                                 loading="lazy"
                             >
@@ -1821,10 +1758,10 @@
 
                         <div
                             class="thumbnail"
-                            onclick="changePreview(this, 'images/motor-3.png')"
+                            onclick="changePreview(this, 'motor', 2)"
                         >
                             <img
-                                src="images/motor-3.png"
+                                data-thumb="motor" data-index="2"
                                 alt=""
                                 loading="lazy"
                             >
@@ -1837,26 +1774,15 @@
 
                 <div class="product-content">
 
-                    <h3 class="product-title">
-                        Set Latihan Motor Skill & Focus
-                    </h3>
+                    <h3 class="product-title" data-bind="name:motor"></h3>
 
-                    <p class="product-description">
-                        Aktiviti hands-on untuk melatih motor halus,
-                        koordinasi, ketepatan dan fokus anak.
-                    </p>
+                    <p class="product-description" data-bind="desc:motor"></p>
 
-                    <ul class="product-features">
-                        <li>Maze, Matching & Trace Lines</li>
-                        <li>Cari Perbezaan & Gunting & Tampal</li>
-                        <li>Pelbagai aktiviti Busy Book</li>
-                    </ul>
+                    <ul class="product-features" data-features="motor"></ul>
 
                     <div class="product-bottom">
 
-                        <div class="product-price">
-                            RM15
-                        </div>
+                        <div class="product-price" data-bind="singlePrice"></div>
 
                         <button
                             class="select-btn"
@@ -1872,20 +1798,19 @@
             </div>
 
 
-            <!-- PRODUCT 4 -->
+            <!-- PRODUCT 3 -->
 
             <div
                 class="product-card"
-                data-product="tahun1"
-                data-price="15"
+                data-product="nombor"
             >
 
                 <div class="main-preview">
 
                     <img
                         class="main-image"
-                        src="images/tahun1-1.png"
-                        alt="Set Latihan Tahap 1 Tahun 1 hingga Tahun 3"
+                        data-product-image="nombor"
+                        alt="Set Nombor dan Bentuk"
                         loading="lazy"
                         onclick="openLightbox(this.src)"
                     >
@@ -1894,10 +1819,10 @@
 
                         <div
                             class="thumbnail active"
-                            onclick="changePreview(this, 'images/tahun1-1.png')"
+                            onclick="changePreview(this, 'nombor', 0)"
                         >
                             <img
-                                src="images/tahun1-1.png"
+                                data-thumb="nombor" data-index="0"
                                 alt=""
                                 loading="lazy"
                             >
@@ -1905,10 +1830,10 @@
 
                         <div
                             class="thumbnail"
-                            onclick="changePreview(this, 'images/tahun1-2.png')"
+                            onclick="changePreview(this, 'nombor', 1)"
                         >
                             <img
-                                src="images/tahun1-2.png"
+                                data-thumb="nombor" data-index="1"
                                 alt=""
                                 loading="lazy"
                             >
@@ -1916,10 +1841,10 @@
 
                         <div
                             class="thumbnail"
-                            onclick="changePreview(this, 'images/tahun1-3.png')"
+                            onclick="changePreview(this, 'nombor', 2)"
                         >
                             <img
-                                src="images/tahun1-3.png"
+                                data-thumb="nombor" data-index="2"
                                 alt=""
                                 loading="lazy"
                             >
@@ -1932,32 +1857,110 @@
 
                 <div class="product-content">
 
-                    <h3 class="product-title">
-                        Set Latihan Tahap 1
-                    </h3>
+                    <h3 class="product-title" data-bind="name:nombor"></h3>
 
-                    <p class="product-description">
-                        Koleksi latihan Tahun 1 hingga Tahun 3 merangkumi
-                        4 subjek utama serta latihan bonus.
-                    </p>
+                    <p class="product-description" data-bind="desc:nombor"></p>
 
-                    <ul class="product-features">
-                        <li>Bahasa Melayu & English</li>
-                        <li>Matematik & Sains</li>
-                        <li>Latihan Bonus</li>
-                    </ul>
+                    <ul class="product-features" data-features="nombor"></ul>
+
+                    <div class="product-bottom">
+
+                        <div class="product-price" data-bind="singlePrice"></div>
+
+                        <button
+                            class="select-btn"
+                            onclick="toggleProduct('nombor')"
+                        >
+                            Pilih Set
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 4 : BUNDLE -->
+
+            <div
+                class="product-card featured"
+                data-product="bundle"
+            >
+
+                <div class="product-ribbon">
+                    Paling Berbaloi
+                </div>
+
+                <div class="main-preview">
+
+                    <img
+                        class="main-image"
+                        data-product-image="bundle"
+                        alt="Set Bundle Lengkap"
+                        loading="lazy"
+                        onclick="openLightbox(this.src)"
+                    >
+
+                    <div class="thumbnail-row">
+
+                        <div
+                            class="thumbnail active"
+                            onclick="changePreview(this, 'bundle', 0)"
+                        >
+                            <img
+                                data-thumb="bundle" data-index="0"
+                                alt=""
+                                loading="lazy"
+                            >
+                        </div>
+
+                        <div
+                            class="thumbnail"
+                            onclick="changePreview(this, 'bundle', 1)"
+                        >
+                            <img
+                                data-thumb="bundle" data-index="1"
+                                alt=""
+                                loading="lazy"
+                            >
+                        </div>
+
+                        <div
+                            class="thumbnail"
+                            onclick="changePreview(this, 'bundle', 2)"
+                        >
+                            <img
+                                data-thumb="bundle" data-index="2"
+                                alt=""
+                                loading="lazy"
+                            >
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="product-content">
+
+                    <h3 class="product-title" data-bind="name:bundle"></h3>
+
+                    <p class="product-description" data-bind="desc:bundle"></p>
+
+                    <ul class="product-features" data-features="bundle"></ul>
 
                     <div class="product-bottom">
 
                         <div class="product-price">
-                            RM15
+                            <span class="old-price" data-bind="normalBundlePrice"></span><span data-bind="bundlePrice"></span>
                         </div>
 
                         <button
                             class="select-btn"
-                            onclick="toggleProduct('tahun1')"
+                            onclick="toggleProduct('bundle')"
                         >
-                            Pilih Set
+                            Pilih Bundle
                         </button>
 
                     </div>
@@ -2108,11 +2111,11 @@
         <div class="section-title">
 
             <div class="badge">
-                Harga Bundle
+                Harga
             </div>
 
             <h2>
-                Lagi Banyak Set, Lagi Berbaloi
+                Beli Satu Set Atau Ambil Bundle
             </h2>
 
         </div>
@@ -2123,7 +2126,7 @@
 
                 <thead>
                     <tr>
-                        <th>Bilangan Set</th>
+                        <th>Set</th>
                         <th>Harga</th>
                     </tr>
                 </thead>
@@ -2131,23 +2134,26 @@
                 <tbody>
 
                     <tr>
-                        <td>1 Set</td>
-                        <td>RM15</td>
+                        <td data-bind="name:membaca"></td>
+                        <td data-bind="singlePrice"></td>
                     </tr>
 
                     <tr>
-                        <td>2 Set</td>
-                        <td>RM25</td>
+                        <td data-bind="name:motor"></td>
+                        <td data-bind="singlePrice"></td>
                     </tr>
 
                     <tr>
-                        <td>3 Set</td>
-                        <td>RM35</td>
+                        <td data-bind="name:nombor"></td>
+                        <td data-bind="singlePrice"></td>
                     </tr>
 
-                    <tr>
-                        <td>4 Set</td>
-                        <td>RM45</td>
+                    <tr class="bundle-row">
+                        <td>
+                            <span data-bind="name:bundle"></span>
+                            <small data-bind="bundleTagline"></small>
+                        </td>
+                        <td data-bind="bundlePrice"></td>
                     </tr>
 
                 </tbody>
@@ -2155,9 +2161,9 @@
             </table>
 
             <div class="price-note">
-                Pilih set yang anda mahu. Sistem akan mengira
-                harga bundle secara automatik berdasarkan jumlah
-                set yang dipilih.
+                Pilih Set Bundle untuk dapat semua 3 set serta bonus
+                buku aktiviti dengan harga <span data-bind="bundlePrice"></span> sahaja (jimat berbanding
+                <span data-bind="normalBundlePrice"></span> jika beli satu per satu).
             </div>
 
         </div>
@@ -2198,7 +2204,7 @@
                 </h3>
 
                 <p>
-                    Pilih satu atau beberapa set yang anda perlukan.
+                    Pilih satu atau beberapa set, atau terus ambil Set Bundle.
                 </p>
 
             </div>
@@ -2318,8 +2324,29 @@
                 </button>
 
                 <div class="faq-answer">
-                    Ya. Pilih beberapa set dan sistem akan
-                    mengira harga bundle secara automatik.
+                    Ya. Setiap set berharga <span data-bind="singlePrice"></span>. Jika mahu semua set,
+                    pilih Set Bundle Lengkap pada harga <span data-bind="bundlePrice"></span> yang
+                    termasuk bonus buku aktiviti.
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button
+                    class="faq-question"
+                    onclick="toggleFAQ(this)"
+                >
+                    <span>
+                        Apa yang ada dalam Set Bundle?
+                    </span>
+
+                    <span class="faq-icon">+</span>
+                </button>
+
+                <div class="faq-answer">
+                    Set Bundle merangkumi <span data-bind="bundleIncludesText"></span>.
                 </div>
 
             </div>
@@ -2490,7 +2517,7 @@
 
             <img
                 class="qr-img"
-                src="images/duitnow-qr.png"
+                id="qrImage"
                 alt="DuitNow QR"
             >
 
@@ -2643,65 +2670,262 @@
 
 <script>
 
+    /* ================================================================
+       TETAPAN  >>> SEMUA BENDA YANG PERLU KAU ISI / TUKAR ADA DI SINI <<<
+       Tak perlu edit HTML. Simpan, refresh, siap.
+    ================================================================ */
+
+    /* ---- 1. HARGA (RM, nombor sahaja) ---- */
+    const SINGLE_PRICE = 15;   // harga satu set
+    const BUNDLE_PRICE = 39;   // harga Set Bundle Lengkap
+    // Harga "sebelum diskaun" Bundle (yang dicoret) = 3 x harga satu set, dikira automatik.
+
+    /* ---- 2. WHATSAPP & AKAUN BANK ---- */
+    const WHATSAPP_NUMBER = "601154415001";   // format antarabangsa, tanpa + atau 0 di depan. cth: 60123456789
+    const BANK_NAME       = "Maybank";
+    const ACCOUNT_NAME    = "Muhammad Hariz bin Saipul Islam";
+    const ACCOUNT_NO      = "162731045790";
+
+    /* ---- 3. VIDEO CONTOH (YouTube) ----
+       Letak ID video sahaja.
+       cth: https://www.youtube.com/watch?v=dVIg8knnWaY  ->  "dVIg8knnWaY" */
+    const VIDEO_ID = "dVIg8knnWaY";
+
+    /* ---- 4. GAMBAR (semua fail dalam folder IMAGE_FOLDER) ---- */
+    const IMAGE_FOLDER = "images/";
+
+    const HERO_IMAGE = "hero-2.jpeg";           // gambar besar atas sekali
+    const QR_IMAGE   = "duitnow-qr.png";      // QR DuitNow di checkout
+
+    // Gambar produk: 3 gambar setiap set.
+    // Yang pertama jadi gambar utama, ketiga-tiganya jadi thumbnail.
+    const productImages = {
+
+        membaca: [
+            "ver2-membaca-1.png",
+            "ver2-membaca-2.png",
+            "ver2-membaca-3.png"
+        ],
+
+        motor: [
+            "ver2-motor-1.png",
+            "ver2-motor-2.png",
+            "ver2-motor-3.png"
+        ],
+
+        nombor: [
+            "ver2-nombor-1.png",   // placeholder
+            "ver2-nombor-2.png",   // placeholder
+            "ver2-nombor-3.png"    // placeholder
+        ],
+
+        bundle: [
+            "ver2-membaca-3.png",   // placeholder
+            "ver2-motor-3.png",   // placeholder
+            "ver2-nombor-3.png"    // placeholder
+        ]
+
+    };
+
+    /* ---- 5. NAMA, PENERANGAN & SENARAI CIRI SETIAP PRODUK ----
+       Nama set akan keluar di kad produk, jadual harga, cart,
+       checkout dan mesej WhatsApp. */
+    const PRODUCT_INFO = {
+
+        membaca: {
+            name: "Set Kenal Huruf & Membaca",
+            description: "Bina asas membaca melalui aktiviti mengenal huruf yang mudah, menarik dan sesuai untuk kanak-kanak.",
+            features: [
+                "Coloring & Tracing",
+                "Matching Huruf",
+                "Flash Card"
+            ]
+        },
+
+        motor: {
+            name: "Set Motor Halus & Focus",
+            description: "Aktiviti hands-on untuk melatih motor halus, koordinasi, ketepatan dan fokus anak.",
+            features: [
+                "Maze",
+                "Matching",
+                "Tracing"
+            ]
+        },
+
+        nombor: {
+            name: "Set Nombor & Bentuk",
+            description: "Kenalkan nombor dan bentuk asas melalui aktiviti yang mudah dan menyeronokkan.",
+            features: [
+                "Coloring & Tracing",
+                "Matching Nombor & Bentuk",
+                "Flash Card"
+            ]
+        },
+
+        // Ciri Bundle dikira automatik: semua nama set di atas + BONUS_NAME
+        bundle: {
+            name: "Set Bundle Lengkap",
+            description: "Dapatkan semua set dalam satu pakej lebih jimat, siap dengan bonus buku aktiviti."
+        }
+
+    };
+
+    const BONUS_NAME = "Bonus Buku Aktiviti";   // bonus dalam Set Bundle
+
+    /* ================================================================
+       TAMAT TETAPAN. Bawah ni tak perlu disentuh.
+    ================================================================ */
+
+
+    // Dikira automatik daripada tetapan di atas
+    const BUNDLE_SET_NAMES = ["membaca", "motor", "nombor"].map(id => PRODUCT_INFO[id].name);
+
+    const BUNDLE_INCLUDES = [...BUNDLE_SET_NAMES, BONUS_NAME];
+
+
+    /* ================================================
+       APPLY TETAPAN KE HALAMAN
+    ================================================ */
+
+    function applyConfig() {
+
+        const bindings = {
+            singlePrice:         `RM${SINGLE_PRICE}`,
+            bundlePrice:         `RM${BUNDLE_PRICE}`,
+            normalBundlePrice:   `RM${SINGLE_PRICE * 3}`,
+            bundleTagline:       `Semua ${BUNDLE_SET_NAMES.length} set + ${BONUS_NAME.toLowerCase()}`,
+            bundleIncludesText:  `${BUNDLE_SET_NAMES.join(", ")}, serta ${BONUS_NAME.toLowerCase()}`
+        };
+
+        Object.keys(PRODUCT_INFO).forEach(id => {
+
+            bindings[`name:${id}`] = PRODUCT_INFO[id].name;
+            bindings[`desc:${id}`] = PRODUCT_INFO[id].description;
+
+            const mainImage = document.querySelector(
+                `[data-product-image="${id}"]`
+            );
+
+            if (mainImage) {
+                mainImage.alt = PRODUCT_INFO[id].name;
+            }
+
+        });
+
+        document.querySelectorAll("[data-bind]").forEach(el => {
+
+            const value = bindings[el.dataset.bind];
+
+            if (value !== undefined) {
+                el.textContent = value;
+            }
+
+        });
+
+
+        document.querySelectorAll("[data-features]").forEach(list => {
+
+            const id = list.dataset.features;
+
+            const items = id === "bundle"
+                ? BUNDLE_INCLUDES
+                : PRODUCT_INFO[id].features;
+
+            list.textContent = "";
+
+            items.forEach(text => {
+
+                const li = document.createElement("li");
+
+                li.textContent = text;
+
+                list.appendChild(li);
+
+            });
+
+        });
+
+
+        document.getElementById("heroImage").src =
+            IMAGE_FOLDER + HERO_IMAGE;
+
+        document.getElementById("qrImage").src =
+            IMAGE_FOLDER + QR_IMAGE;
+
+        document.getElementById("sampleVideo").src =
+            `https://www.youtube-nocookie.com/embed/${VIDEO_ID}?rel=0&modestbranding=1&playsinline=1`;
+
+    }
+
     /* ================================================
        PRODUCT DATA
     ================================================ */
 
-    const products = {
+    const products = {};
 
-        autisme: {
-            name: "Set Anak Autisme",
-            price: 15
-        },
+    Object.keys(PRODUCT_INFO).forEach(id => {
 
-        membaca: {
-            name: "Set Anak Cepat Kenal Huruf & Membaca",
-            price: 15
-        },
+        products[id] = {
+            name: PRODUCT_INFO[id].name,
+            price: id === "bundle" ? BUNDLE_PRICE : SINGLE_PRICE
+        };
 
-        motor: {
-            name: "Set Latihan Motor Skill & Focus",
-            price: 15
-        },
+    });
 
-        tahun1: {
-            name: "Set Latihan Tahap 1",
-            price: 15
-        }
+    products.bundle.includes = BUNDLE_INCLUDES;
 
-    };
+    /* ================================================
+       GAMBAR PRODUK (nama fail ditetapkan di bahagian TETAPAN)
+    ================================================ */
+
+    function initProductImages() {
+
+        Object.keys(productImages).forEach(productId => {
+
+            const files = productImages[productId];
+
+            const mainImage = document.querySelector(
+                `[data-product-image="${productId}"]`
+            );
+
+            if (mainImage) {
+                mainImage.src = IMAGE_FOLDER + files[0];
+            }
+
+            document
+                .querySelectorAll(`[data-thumb="${productId}"]`)
+                .forEach(img => {
+
+                    const file = files[Number(img.dataset.index)];
+
+                    if (file) {
+                        img.src = IMAGE_FOLDER + file;
+                    }
+
+                });
+
+        });
+
+    }
 
 
     let selectedProducts = [];
 
 
     /* ================================================
-       BUNDLE PRICE
+       PRICE
+       - Bundle dipilih: RM39 (set individu dilepaskan)
+       - Selain itu: RM15 setiap set
     ================================================ */
 
-    function calculatePrice(count) {
+    function calculateTotal() {
 
-        if (count === 0) {
-            return 0;
+        if (selectedProducts.includes("bundle")) {
+            return BUNDLE_PRICE;
         }
 
-        if (count === 1) {
-            return 15;
-        }
+        return selectedProducts.length * SINGLE_PRICE;
 
-        if (count === 2) {
-            return 25;
-        }
-
-        if (count === 3) {
-            return 35;
-        }
-
-        if (count === 4) {
-            return 45;
-        }
-
-        return 45;
     }
 
 
@@ -2709,7 +2933,7 @@
        SELECT PRODUCT
     ================================================ */
 
-    function toggleProduct(productId) {
+    function setSelected(productId, isSelected) {
 
         const card = document.querySelector(
             `[data-product="${productId}"]`
@@ -2719,22 +2943,68 @@
 
         const index = selectedProducts.indexOf(productId);
 
-
-        if (index === -1) {
+        if (isSelected && index === -1) {
 
             selectedProducts.push(productId);
 
-            card.classList.add("selected");
+        }
 
-            button.textContent = "✓ Dipilih";
-
-        } else {
+        if (!isSelected && index !== -1) {
 
             selectedProducts.splice(index, 1);
 
-            card.classList.remove("selected");
+        }
 
-            button.textContent = "Pilih Set";
+        card.classList.toggle("selected", isSelected);
+
+        if (productId === "bundle") {
+
+            button.textContent = isSelected
+                ? "✓ Dipilih"
+                : "Pilih Bundle";
+
+        } else {
+
+            button.textContent = isSelected
+                ? "✓ Dipilih"
+                : "Pilih Set";
+
+        }
+
+    }
+
+
+    function toggleProduct(productId) {
+
+        const isSelected =
+            selectedProducts.includes(productId);
+
+
+        if (isSelected) {
+
+            setSelected(productId, false);
+
+        } else if (productId === "bundle") {
+
+            // Bundle ganti semua set individu
+            Object.keys(products).forEach(id => {
+
+                if (id !== "bundle") {
+
+                    setSelected(id, false);
+
+                }
+
+            });
+
+            setSelected("bundle", true);
+
+        } else {
+
+            // Pilih set individu: lepaskan bundle
+            setSelected("bundle", false);
+
+            setSelected(productId, true);
 
         }
 
@@ -2752,7 +3022,7 @@
 
         const count = selectedProducts.length;
 
-        const total = calculatePrice(count);
+        const total = calculateTotal();
 
         const cartBar = document.getElementById("cartBar");
 
@@ -2773,10 +3043,18 @@
         cartBar.classList.add("show");
 
 
-        cartCount.textContent =
-            count === 1
-                ? "1 set dipilih"
-                : `${count} set dipilih`;
+        if (selectedProducts.includes("bundle")) {
+
+            cartCount.textContent = "Set Bundle Lengkap";
+
+        } else {
+
+            cartCount.textContent =
+                count === 1
+                    ? "1 set dipilih"
+                    : `${count} set dipilih`;
+
+        }
 
 
         cartTotal.textContent =
@@ -2789,7 +3067,7 @@
        PREVIEW IMAGE
     ================================================ */
 
-    function changePreview(thumbnail, imagePath) {
+    function changePreview(thumbnail, productId, index) {
 
         const productCard =
             thumbnail.closest(".product-card");
@@ -2798,7 +3076,8 @@
             productCard.querySelector(".main-image");
 
 
-        mainImage.src = imagePath;
+        mainImage.src =
+            IMAGE_FOLDER + productImages[productId][index];
 
 
         const thumbnails =
@@ -2894,11 +3173,24 @@
 
             `;
 
+
+            if (product.includes) {
+
+                html += `
+
+                    <div class="checkout-sub">
+                        ${product.includes.join(" + ")}
+                    </div>
+
+                `;
+
+            }
+
         });
 
 
         const total =
-            calculatePrice(selectedProducts.length);
+            calculateTotal();
 
 
         html += `
@@ -2947,12 +3239,6 @@
        PEMBAYARAN DIRECT (DuitNow QR / Bank Transfer)
     ================================================ */
 
-    /* >>> TUKAR 4 NILAI INI <<< */
-    const WHATSAPP_NUMBER = "601154415001";   // format antarabangsa, tanpa + atau 0 di depan. cth: 60123456789
-    const BANK_NAME       = "Maybank";       // nama bank akaun anda
-    const ACCOUNT_NAME    = "Muhammad Hariz bin Saipul Islam";
-    const ACCOUNT_NO      = "162731045790";
-
     let currentOrderRef = "";
 
     function makeOrderRef() {
@@ -2966,7 +3252,7 @@
 
     function renderPayment() {
 
-        const total = calculatePrice(selectedProducts.length);
+        const total = calculateTotal();
 
         currentOrderRef = makeOrderRef();
 
@@ -3021,11 +3307,17 @@
             return;
         }
 
-        const total = calculatePrice(selectedProducts.length);
+        const total = calculateTotal();
 
-        const lines = selectedProducts.map(
-            (id, i) => `${i + 1}. ${products[id].name}`
-        );
+        const lines = selectedProducts.map((id, i) => {
+
+            const product = products[id];
+
+            return product.includes
+                ? `${i + 1}. ${product.name} (${product.includes.join(" + ")})`
+                : `${i + 1}. ${product.name}`;
+
+        });
 
         const message =
 `Salam, saya nak order worksheet EduKids.
@@ -3097,6 +3389,14 @@ Saya dah bayar melalui DuitNow QR / bank transfer. Bukti pembayaran saya lampirk
         }
 
     }
+
+
+    /* ================================================
+       INIT
+    ================================================ */
+
+    applyConfig();
+    initProductImages();
 
 
     /* ================================================
